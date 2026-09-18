@@ -1233,7 +1233,7 @@
       "record_id": "recvvxVmH0OAq4",
       "model": "AMBFC04DW-C1-N1-US",
       "rank": 53,
-      "K": 90,
+      "K": 49,
       "price": 249.99,
       "s30": 0.0,
       "u_a": 139.9944,
@@ -1243,19 +1243,19 @@
       "q_b": 0,
       "q_c": 0,
       "k_a": 0,
-      "k_b": 90,
+      "k_b": 49,
       "k_c": 0,
       "dk": 0,
       "full_k_ref": {
-        "A": 12599.496000000001,
-        "B": 3374.865,
-        "C": -179.99280000000002
+        "A": 6859.725600000001,
+        "B": 1837.4265,
+        "C": -97.99608
       },
       "bonus_c": 0.0,
       "provision": 0.0,
       "prov_detail": [],
-      "net": 3374.865,
-      "best_layer": "B出清(90套)",
+      "net": 1837.4265,
+      "best_layer": "B出清(49套)",
       "compare": {
         "A_降价卖": {
           "net": 0.0,
@@ -1263,24 +1263,24 @@
           "note": "60天窗口内预计可卖"
         },
         "B_线下清库": {
-          "net": 3374.865,
-          "sell": 90,
+          "net": 1837.4265,
+          "sell": 49,
           "note": "全量出清给线下渠道"
         },
         "C_激励方案": {
-          "net": -179.99280000000002,
-          "sell": 90,
+          "net": -97.99608,
+          "sell": 49,
           "note": "本渠道收入0,付奖金消化库存"
         },
         "最优组合": {
-          "net": 3374.865,
-          "sell": 90,
-          "note": "B出清(90套)"
+          "net": 1837.4265,
+          "sell": 49,
+          "note": "B出清(49套)"
         }
       },
-      "best_plan": "B出清(90套)",
+      "best_plan": "B出清(49套)",
       "best_option": "A促销+剩余走B出清",
-      "best_net": 3374.865,
+      "best_net": 1837.4265,
       "best_window": null,
       "best_window_plan": "",
       "best_window_net": null,
@@ -1291,263 +1291,33 @@
       "cost_head": 0.0,
       "cost_tariff": 0.0,
       "cost_last": 0.0,
-      "factory": null
-    },
-    {
-      "record_id": "recvvxVqLc9dQq",
-      "model": "AMBFC04DW-C2-N1-US",
-      "rank": 54,
-      "K": 41,
-      "price": 244.99,
-      "s30": 0.0,
-      "u_a": 137.19440000000003,
-      "u_b": 36.7485,
-      "u_c": -1.9599200000000003,
-      "q_a": 0,
-      "q_b": 0,
-      "q_c": 0,
-      "k_a": 0,
-      "k_b": 41,
-      "k_c": 0,
-      "dk": 0,
-      "full_k_ref": {
-        "A": 5624.970400000001,
-        "B": 1506.6885,
-        "C": -80.35672000000001
-      },
-      "bonus_c": 0.0,
-      "provision": 0.0,
-      "prov_detail": [],
-      "net": 1506.6885,
-      "best_layer": "B出清(41套)",
-      "compare": {
-        "A_降价卖": {
-          "net": -205.827,
-          "sell": 0,
-          "note": "60天窗口内预计可卖"
+      "factory": {
+        "decided": true,
+        "fac_qty_by_comp": {
+          "AMBFC04DW-C1-N1-US": 298.0
         },
-        "B_线下清库": {
-          "net": 1506.6885,
-          "sell": 41,
-          "note": "全量出清给线下渠道"
-        },
-        "C_激励方案": {
-          "net": -80.35672000000001,
-          "sell": 41,
-          "note": "本渠道收入0,付奖金消化库存"
-        },
-        "最优组合": {
-          "net": 1506.6885,
-          "sell": 41,
-          "note": "B出清(41套)"
-        }
-      },
-      "best_plan": "B出清(41套)",
-      "best_option": "A促销+剩余走B出清",
-      "best_net": 1506.6885,
-      "best_window": null,
-      "best_window_plan": "",
-      "best_window_net": null,
-      "storage_fee": 0.0,
-      "storage_fee_a": 0.0,
-      "storage_fee_b": 0.0,
-      "cost_buy": 0.0,
-      "cost_head": 0.0,
-      "cost_tariff": 0.0,
-      "cost_last": 0.0,
-      "factory": null
-    },
-    {
-      "record_id": "recvvxYOsJXySQ",
-      "model": "AMBFC04NR-C1-N1-US",
-      "rank": 56,
-      "K": 54,
-      "price": 209.99,
-      "s30": 0.0,
-      "u_a": 117.59440000000001,
-      "u_b": 31.4985,
-      "u_c": -1.67992,
-      "q_a": 0,
-      "q_b": 0,
-      "q_c": 0,
-      "k_a": 0,
-      "k_b": 54,
-      "k_c": 0,
-      "dk": 0,
-      "full_k_ref": {
-        "A": 6350.0976,
-        "B": 1700.919,
-        "C": -90.71568
-      },
-      "bonus_c": 0.0,
-      "provision": 0.0,
-      "prov_detail": [],
-      "net": 1700.919,
-      "best_layer": "B出清(54套)",
-      "compare": {
-        "A_降价卖": {
-          "net": 0.0,
-          "sell": 0,
-          "note": "60天窗口内预计可卖"
-        },
-        "B_线下清库": {
-          "net": 1700.919,
-          "sell": 54,
-          "note": "全量出清给线下渠道"
-        },
-        "C_激励方案": {
-          "net": -90.71568,
-          "sell": 54,
-          "note": "本渠道收入0,付奖金消化库存"
-        },
-        "最优组合": {
-          "net": 1700.919,
-          "sell": 54,
-          "note": "B出清(54套)"
-        }
-      },
-      "best_plan": "B出清(54套)",
-      "best_option": "A促销+剩余走B出清",
-      "best_net": 1700.919,
-      "best_window": null,
-      "best_window_plan": "",
-      "best_window_net": null,
-      "storage_fee": 0.0,
-      "storage_fee_a": 0.0,
-      "storage_fee_b": 0.0,
-      "cost_buy": 0.0,
-      "cost_head": 0.0,
-      "cost_tariff": 0.0,
-      "cost_last": 0.0,
-      "factory": null
-    },
-    {
-      "record_id": "recvvxYQSWe8IB",
-      "model": "AMBFC04NR-C2-N1-US",
-      "rank": 57,
-      "K": 52,
-      "price": 224.99,
-      "s30": 0.0,
-      "u_a": 125.99440000000001,
-      "u_b": 33.7485,
-      "u_c": -1.7999200000000002,
-      "q_a": 0,
-      "q_b": 0,
-      "q_c": 0,
-      "k_a": 0,
-      "k_b": 52,
-      "k_c": 0,
-      "dk": 0,
-      "full_k_ref": {
-        "A": 6551.7088,
-        "B": 1754.922,
-        "C": -93.59584000000001
-      },
-      "bonus_c": 0.0,
-      "provision": 0.0,
-      "prov_detail": [],
-      "net": 1754.922,
-      "best_layer": "B出清(52套)",
-      "compare": {
-        "A_降价卖": {
-          "net": 0.0,
-          "sell": 0,
-          "note": "60天窗口内预计可卖"
-        },
-        "B_线下清库": {
-          "net": 1754.922,
-          "sell": 52,
-          "note": "全量出清给线下渠道"
-        },
-        "C_激励方案": {
-          "net": -93.59584000000001,
-          "sell": 52,
-          "note": "本渠道收入0,付奖金消化库存"
-        },
-        "最优组合": {
-          "net": 1754.922,
-          "sell": 52,
-          "note": "B出清(52套)"
-        }
-      },
-      "best_plan": "B出清(52套)",
-      "best_option": "A促销+剩余走B出清",
-      "best_net": 1754.922,
-      "best_window": null,
-      "best_window_plan": "",
-      "best_window_net": null,
-      "storage_fee": 0.0,
-      "storage_fee_a": 0.0,
-      "storage_fee_b": 0.0,
-      "cost_buy": 0.0,
-      "cost_head": 0.0,
-      "cost_tariff": 0.0,
-      "cost_last": 0.0,
-      "factory": null
-    },
-    {
-      "record_id": "recvvxVtTkV1ru",
-      "model": "AMBFC04NW-C1-N1-US",
-      "rank": 58,
-      "K": 8,
-      "price": 229.99,
-      "s30": 0.0,
-      "u_a": 128.79440000000002,
-      "u_b": 34.4985,
-      "u_c": -1.8399200000000002,
-      "q_a": 0,
-      "q_b": 0,
-      "q_c": 0,
-      "k_a": 0,
-      "k_b": 8,
-      "k_c": 0,
-      "dk": 0,
-      "full_k_ref": {
-        "A": 1030.3552000000002,
-        "B": 275.988,
-        "C": -14.719360000000002
-      },
-      "bonus_c": 0.0,
-      "provision": 0.0,
-      "prov_detail": [],
-      "net": 275.988,
-      "best_layer": "B出清(8套)",
-      "compare": {
-        "A_降价卖": {
-          "net": 0.0,
-          "sell": 0,
-          "note": "60天窗口内预计可卖"
-        },
-        "B_线下清库": {
-          "net": 275.988,
-          "sell": 8,
-          "note": "全量出清给线下渠道"
-        },
-        "C_激励方案": {
-          "net": -14.719360000000002,
-          "sell": 8,
-          "note": "本渠道收入0,付奖金消化库存"
-        },
-        "最优组合": {
-          "net": 275.988,
-          "sell": 8,
-          "note": "B出清(8套)"
-        }
-      },
-      "best_plan": "B出清(8套)",
-      "best_option": "A促销+剩余走B出清",
-      "best_net": 275.988,
-      "best_window": null,
-      "best_window_plan": "",
-      "best_window_net": null,
-      "storage_fee": 0.0,
-      "storage_fee_a": 0.0,
-      "storage_fee_b": 0.0,
-      "cost_buy": 0.0,
-      "cost_head": 0.0,
-      "cost_tariff": 0.0,
-      "cost_last": 0.0,
-      "factory": null
+        "f_min": 298.0,
+        "u_ship": 139.9944,
+        "ship_qty": 298,
+        "decision": "整单全发(298套)",
+        "loss_not_ship": 0.0,
+        "v_best": 41718.3312,
+        "v_baseline": -0.0,
+        "cands": [
+          {
+            "X": 0,
+            "V": 0.0
+          },
+          {
+            "X": 149,
+            "V": 20859.1656
+          },
+          {
+            "X": 298,
+            "V": 41718.3312
+          }
+        ]
+      }
     },
     {
       "record_id": "recvvxYMdV8fJE",
@@ -1617,7 +1387,7 @@
       "record_id": "recvvxV5HarHZt",
       "model": "AMESD01DW-V-N1-US",
       "rank": 63,
-      "K": 1,
+      "K": 42,
       "price": 629.99,
       "s30": 0.0,
       "u_a": 352.7944,
@@ -1627,44 +1397,44 @@
       "q_b": 0,
       "q_c": 0,
       "k_a": 0,
-      "k_b": 1,
+      "k_b": 42,
       "k_c": 0,
       "dk": 0,
       "full_k_ref": {
-        "A": 352.7944,
-        "B": 94.49849999999999,
-        "C": -5.03992
+        "A": 14817.3648,
+        "B": 3968.937,
+        "C": -211.67664000000002
       },
       "bonus_c": 0.0,
       "provision": 0.0,
       "prov_detail": [],
-      "net": 94.49849999999999,
-      "best_layer": "B出清(1套)",
+      "net": 3968.937,
+      "best_layer": "B出清(42套)",
       "compare": {
         "A_降价卖": {
-          "net": -21.633,
+          "net": -670.2599999999996,
           "sell": 0,
           "note": "60天窗口内预计可卖"
         },
         "B_线下清库": {
-          "net": 94.49849999999999,
-          "sell": 1,
+          "net": 3968.937,
+          "sell": 42,
           "note": "全量出清给线下渠道"
         },
         "C_激励方案": {
-          "net": -5.03992,
-          "sell": 1,
+          "net": -211.67664000000002,
+          "sell": 42,
           "note": "本渠道收入0,付奖金消化库存"
         },
         "最优组合": {
-          "net": 94.49849999999999,
-          "sell": 1,
-          "note": "B出清(1套)"
+          "net": 3968.937,
+          "sell": 42,
+          "note": "B出清(42套)"
         }
       },
-      "best_plan": "B出清(1套)",
+      "best_plan": "B出清(42套)",
       "best_option": "A促销+剩余走B出清",
-      "best_net": 94.49849999999999,
+      "best_net": 3968.937,
       "best_window": null,
       "best_window_plan": "",
       "best_window_net": null,
@@ -1675,13 +1445,98 @@
       "cost_head": 0.0,
       "cost_tariff": 0.0,
       "cost_last": 0.0,
-      "factory": null
+      "factory": {
+        "decided": false,
+        "reason": "子件未填工厂未发货量: AMBFC04DW-C2-N1-US,HNESD217B-US,AMESD01DW-D-N1-US",
+        "fac_qty_by_comp": {
+          "AMBFC04DW-C1-N1-US": 298.0
+        },
+        "f_min": 298.0,
+        "ship_qty": null,
+        "decision": "",
+        "loss_not_ship": null
+      }
+    },
+    {
+      "record_id": "recvvxVkpBtR1A",
+      "model": "AMESD01NR-V-N1-US",
+      "rank": 64,
+      "K": 131,
+      "price": 549.99,
+      "s30": 0.0,
+      "u_a": 307.99440000000004,
+      "u_b": 82.49849999999999,
+      "u_c": -4.399920000000001,
+      "q_a": 0,
+      "q_b": 0,
+      "q_c": 0,
+      "k_a": 0,
+      "k_b": 131,
+      "k_c": 0,
+      "dk": 0,
+      "full_k_ref": {
+        "A": 40347.26640000001,
+        "B": 10807.303499999998,
+        "C": -576.3895200000001
+      },
+      "bonus_c": 0.0,
+      "provision": 0.0,
+      "prov_detail": [],
+      "net": 10807.303499999998,
+      "best_layer": "B出清(131套)",
+      "compare": {
+        "A_降价卖": {
+          "net": -647.9999999999998,
+          "sell": 0,
+          "note": "60天窗口内预计可卖"
+        },
+        "B_线下清库": {
+          "net": 10807.303499999998,
+          "sell": 131,
+          "note": "全量出清给线下渠道"
+        },
+        "C_激励方案": {
+          "net": -576.3895200000001,
+          "sell": 131,
+          "note": "本渠道收入0,付奖金消化库存"
+        },
+        "最优组合": {
+          "net": 10807.303499999998,
+          "sell": 131,
+          "note": "B出清(131套)"
+        }
+      },
+      "best_plan": "B出清(131套)",
+      "best_option": "A促销+剩余走B出清",
+      "best_net": 10807.303499999998,
+      "best_window": null,
+      "best_window_plan": "",
+      "best_window_net": null,
+      "storage_fee": 0.0,
+      "storage_fee_a": 0.0,
+      "storage_fee_b": 0.0,
+      "cost_buy": 0.0,
+      "cost_head": 0.0,
+      "cost_tariff": 0.0,
+      "cost_last": 0.0,
+      "factory": {
+        "decided": false,
+        "reason": "子件未填工厂未发货量: HNESD217B-US,AMESD01NR-D-N1-US",
+        "fac_qty_by_comp": {
+          "AMBFC04NR-C1-N1-US": 198.0,
+          "AMBFC04NR-C2-N1-US": 296.0
+        },
+        "f_min": 198.0,
+        "ship_qty": null,
+        "decision": "",
+        "loss_not_ship": null
+      }
     },
     {
       "record_id": "recvvxV8axFsrP",
       "model": "AMESD01NW-V-N1-US",
       "rank": 65,
-      "K": 10,
+      "K": 135,
       "price": 0.0,
       "s30": 0.0,
       "u_a": 0.0,
@@ -1691,7 +1546,7 @@
       "q_b": 0,
       "q_c": 0,
       "k_a": 0,
-      "k_b": 10,
+      "k_b": 135,
       "k_c": 0,
       "dk": 0,
       "full_k_ref": {
@@ -1703,30 +1558,30 @@
       "provision": 0.0,
       "prov_detail": [],
       "net": 0.0,
-      "best_layer": "B出清(10套)",
+      "best_layer": "B出清(135套)",
       "compare": {
         "A_降价卖": {
-          "net": -107.99999999999999,
+          "net": 0.0,
           "sell": 0,
           "note": "60天窗口内预计可卖"
         },
         "B_线下清库": {
           "net": 0.0,
-          "sell": 10,
+          "sell": 135,
           "note": "全量出清给线下渠道"
         },
         "C_激励方案": {
           "net": -0.0,
-          "sell": 10,
+          "sell": 135,
           "note": "本渠道收入0,付奖金消化库存"
         },
         "最优组合": {
           "net": 0.0,
-          "sell": 10,
-          "note": "B出清(10套)"
+          "sell": 135,
+          "note": "B出清(135套)"
         }
       },
-      "best_plan": "B出清(10套)",
+      "best_plan": "B出清(135套)",
       "best_option": "A促销+剩余走B出清",
       "best_net": 0.0,
       "best_window": null,
@@ -2255,18 +2110,18 @@
     }
   ],
   "summary": {
-    "total_k": 1431,
+    "total_k": 1532,
     "total_k_a": 248,
-    "total_k_b": 1183,
+    "total_k_b": 1284,
     "total_k_c": 0,
     "total_dk": 0,
     "total_provision": 0.0,
     "total_scrap_cost": 22441.161499209993,
-    "net_channel_total": 122502.64405665302,
+    "net_channel_total": 130408.43005665303,
     "global_best_window": 7,
-    "factory_ship_total": 0,
+    "factory_ship_total": 298,
     "factory_loss_total": 0,
-    "factory_v_gain": 0,
-    "factory_decided_models": 0
+    "factory_v_gain": 41718.3312,
+    "factory_decided_models": 1
   }
 }

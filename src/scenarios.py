@@ -487,11 +487,11 @@ def main():
         global_window = None
 
     # 工厂未发货决策汇总 (decided=False 的 ⚠️ 条目无 ship_qty 等键, 排除后再统计)
-    fac_all = [r["factory"] for r in results if r.get("factory")]
-    fac_decided = [f for f in fac_all if f.get("decided") and f.get("ship_qty") is not None]
-    fac_ship_total = sum(f["ship_qty"] for f in fac_decided)
-    fac_loss_total = sum(f["loss_not_ship"] or 0 for f in fac_decided)
-    fac_v_gain = sum(f["v_best"] - f["v_baseline"] for f in fac_decided)
+    fac_all = [(r["model"], r["factory"]) for r in results if r.get("factory")]
+    fac_decided = [(m, f) for m, f in fac_all if f.get("decided") and f.get("ship_qty") is not None]
+    fac_ship_total = sum(f["ship_qty"] for _, f in fac_decided)
+    fac_loss_total = sum(f["loss_not_ship"] or 0 for _, f in fac_decided)
+    fac_v_gain = sum(f["v_best"] - f["v_baseline"] for _, f in fac_decided)
 
     print(f"参与测算主model数: {len(results)}, 总齐套 K={tot_k:.0f}")
     print(f"分层: A降价 {tot_ka:.0f} 套 | C激励 {tot_kc:.0f} 套 | B线下 {tot_kb:.0f} 套 | 未清库 ΔK={tot_dk:.0f}")
@@ -501,9 +501,8 @@ def main():
     if fac_decided:
         print(f"[工厂] 有决策的 model {len(fac_decided)} 个: 发货合计 {fac_ship_total:.0f} 套 | "
               f"不发货亏损合计 ${fac_loss_total:,.2f} | 决策增量价值 ${fac_v_gain:,.2f}")
-        for r in fac_decided:
-            f = r["factory"]
-            print(f"  {r['model']}: {f['decision']} | u_ship=${f['u_ship']:,.2f} | V=${f['v_best']:,.0f} (不发货V=${f['v_baseline']:,.0f})")
+        for m, f in fac_decided:
+            print(f"  {m}: {f['decision']} | u_ship=${f['u_ship']:,.2f} | V=${f['v_best']:,.0f} (不发货V=${f['v_baseline']:,.0f})")
     print()
     print(f"{'model':28} {'K':>5} {'kA':>4} {'kC':>4} {'kB':>4} {'ΔK':>4} {'net$':>11} {'W*':>4} best")
     for r in sorted(results, key=lambda x: -x["net"]):
