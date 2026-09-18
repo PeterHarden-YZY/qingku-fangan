@@ -1,0 +1,313 @@
+{
+  "manifest_version": "v1",
+  "format": "ndjson",
+  "base_token": "HPsJbdMCva1IersNsFQco976n7B",
+  "table_id": "tblaGnwkT7yEa8cW",
+  "rev": 1,
+  "timezone": "Asia/Shanghai",
+  "query_context": {
+    "field_scope": "all_fields",
+    "record_scope": "all_records"
+  },
+  "requested_limit": 2000,
+  "records_count": 1,
+  "page_count": 1,
+  "has_more": false,
+  "record_file": "D:\\agents_project\\清库方案自动计算\\.workbuddy\\tmp_pr.ndjson",
+  "record_file_size_bytes": 729,
+  "manifest_file": "D:\\agents_project\\清库方案自动计算\\.workbuddy\\tmp_pr.manifest.json",
+  "columns": {
+    "A推广费率": {
+      "field_id": "fldaYY0dZZ",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 0,
+        "min": 0.3,
+        "max": 0.3,
+        "avg": 0.3
+      },
+      "example": 0.3
+    },
+    "A降价幅度": {
+      "field_id": "fldG5RHqX1",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 0,
+        "min": 0.2,
+        "max": 0.2,
+        "avg": 0.2
+      },
+      "example": 0.2
+    },
+    "B线下折扣": {
+      "field_id": "fldVcDIP8Q",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 0,
+        "min": 0.15,
+        "max": 0.15,
+        "avg": 0.15
+      },
+      "example": 0.15
+    },
+    "C促销售价折扣": {
+      "field_id": "fld40TFnBK",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 0,
+        "min": 0.8,
+        "max": 0.8,
+        "avg": 0.8
+      },
+      "example": 0.8
+    },
+    "record_id": {
+      "physical_type": "string",
+      "stats": {
+        "max_length": 14
+      },
+      "example": "recvvlv3d8fLch"
+    },
+    "场景名": {
+      "field_id": "fldl1pvbdj",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 11
+      },
+      "example": "默认场景(代码默认值)"
+    },
+    "备注": {
+      "field_id": "fld7nabbD9",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 22
+      },
+      "example": "与当前代码默认值完全一致,改参数直接编辑本行"
+    },
+    "奖金档1上限(万USD)": {
+      "field_id": "fldvPS39EO",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 0,
+        "min": 20,
+        "max": 20,
+        "avg": 20
+      },
+      "example": 20
+    },
+    "奖金档1比例": {
+      "field_id": "fldZSCsNnw",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 0,
+        "min": 0.01,
+        "max": 0.01,
+        "avg": 0.01
+      },
+      "example": 0.01
+    },
+    "奖金档2上限(万USD)": {
+      "field_id": "fldembAREM",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 0,
+        "min": 50,
+        "max": 50,
+        "avg": 50
+      },
+      "example": 50
+    },
+    "奖金档2比例": {
+      "field_id": "fldEeIrtTK",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 0,
+        "min": 0.015,
+        "max": 0.015,
+        "avg": 0.015
+      },
+      "example": 0.015
+    },
+    "奖金档3比例": {
+      "field_id": "fldOFHL0CC",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 0,
+        "min": 0.02,
+        "max": 0.02,
+        "avg": 0.02
+      },
+      "example": 0.02
+    },
+    "报废费-轻(USD/件)": {
+      "field_id": "fld7So4FS7",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 0,
+        "min": 2,
+        "max": 2,
+        "avg": 2
+      },
+      "example": 2
+    },
+    "报废费-重(USD/件)": {
+      "field_id": "fldz2HKdtv",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 0,
+        "min": 3,
+        "max": 3,
+        "avg": 3
+      },
+      "example": 3
+    },
+    "放大系数上限": {
+      "field_id": "fldFnUDH3d",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 0,
+        "min": 3,
+        "max": 3,
+        "avg": 3
+      },
+      "example": 3
+    },
+    "放大系数下限": {
+      "field_id": "fldHjOhcvc",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 0,
+        "min": 1,
+        "max": 1,
+        "avg": 1
+      },
+      "example": 1
+    },
+    "是否启用": {
+      "field_id": "fldGxt8Zgu",
+      "field_type": "select",
+      "physical_type": "array<string>",
+      "stats": {
+        "empty_count": 0,
+        "max_length": 1,
+        "avg_length": 1
+      },
+      "example": [
+        "启用"
+      ]
+    },
+    "计提库龄分界1(天)": {
+      "field_id": "fldPDiuqch",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 0,
+        "min": 120,
+        "max": 120,
+        "avg": 120
+      },
+      "example": 120
+    },
+    "计提库龄分界2(天)": {
+      "field_id": "fldW0AVTZR",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 0,
+        "min": 180,
+        "max": 180,
+        "avg": 180
+      },
+      "example": 180
+    },
+    "计提比例1(120-180天)": {
+      "field_id": "fldTC5MyL2",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 0,
+        "min": 0.3,
+        "max": 0.3,
+        "avg": 0.3
+      },
+      "example": 0.3
+    },
+    "计提比例2(181-270天)": {
+      "field_id": "fldpGaACgP",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 0,
+        "min": 0.8,
+        "max": 0.8,
+        "avg": 0.8
+      },
+      "example": 0.8
+    },
+    "计提比例3(>270天)": {
+      "field_id": "fldtE6ZKeY",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 0,
+        "min": 1.5,
+        "max": 1.5,
+        "avg": 1.5
+      },
+      "example": 1.5
+    },
+    "重量分界(lbs)": {
+      "field_id": "fldonDlHTl",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 0,
+        "min": 50,
+        "max": 50,
+        "avg": 50
+      },
+      "example": 50
+    },
+    "销量放大系数λ": {
+      "field_id": "fldca8K83X",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 0,
+        "min": 1,
+        "max": 1,
+        "avg": 1
+      },
+      "example": 1
+    },
+    "销量预测窗口(天)": {
+      "field_id": "fldwnEZ8K4",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 0,
+        "min": 30,
+        "max": 30,
+        "avg": 30
+      },
+      "example": 30
+    }
+  }
+}

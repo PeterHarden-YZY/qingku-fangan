@@ -1,0 +1,397 @@
+{
+  "manifest_version": "v1",
+  "format": "ndjson",
+  "base_token": "HPsJbdMCva1IersNsFQco976n7B",
+  "table_id": "tblvEAMIFUSzjYmW",
+  "rev": 404,
+  "timezone": "Asia/Shanghai",
+  "query_context": {
+    "field_scope": "all_fields",
+    "record_scope": "all_records"
+  },
+  "requested_limit": 3,
+  "records_count": 3,
+  "page_count": 1,
+  "has_more": true,
+  "next_offset": 3,
+  "record_file": "D:\\agents_project\\清库方案自动计算\\.workbuddy\\_tmp_main_head.ndjson",
+  "record_file_size_bytes": 2713,
+  "manifest_file": "D:\\agents_project\\清库方案自动计算\\.workbuddy\\_tmp_main_head.manifest.json",
+  "columns": {
+    "DTC渠道库存(渠道齐套无需调拨）": {
+      "field_id": "fldlxLSYeK",
+      "field_type": "lookup",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 1
+      },
+      "example": "0"
+    },
+    "SKU": {
+      "field_id": "fldUXj5IsG",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 14
+      },
+      "example": "AMBFC05NR-US"
+    },
+    "item": {
+      "field_id": "fldPQw7rth",
+      "field_type": "lookup",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 1,
+        "max_length": 13
+      },
+      "example": "C415150104101"
+    },
+    "model": {
+      "field_id": "fldveV7x2m",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 14
+      },
+      "example": "AMBFC05NR-US"
+    },
+    "record_id": {
+      "physical_type": "string",
+      "stats": {
+        "max_length": 14
+      },
+      "example": "recvuAqcP3NAg6"
+    },
+    "仓储费": {
+      "field_id": "fldWZZ6wkU",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 0,
+        "min": 0,
+        "max": 0,
+        "avg": 0
+      },
+      "example": 0
+    },
+    "关税": {
+      "field_id": "fldclGeRQ2",
+      "field_type": "lookup",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 4
+      },
+      "example": "4.62"
+    },
+    "售价": {
+      "field_id": "fldlf3uLXF",
+      "field_type": "lookup",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 7
+      },
+      "example": "609.99"
+    },
+    "固定成本合计": {
+      "field_id": "fld95y4bup",
+      "field_type": "formula",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 11
+      },
+      "example": "261.4741861"
+    },
+    "固定成本合计（明细）": {
+      "field_id": "fldJTcqYlS",
+      "field_type": "lookup",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 11
+      },
+      "example": "87.80725443"
+    },
+    "在途到货时间(天)": {
+      "field_id": "fldiImmyEV",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 3
+      },
+      "hint": "All values are empty; type inference may be ambiguous. Avoid analyzing this column unless required."
+    },
+    "在途库存": {
+      "field_id": "flddngbOgM",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 3
+      },
+      "hint": "All values are empty; type inference may be ambiguous. Avoid analyzing this column unless required."
+    },
+    "处理方案": {
+      "field_id": "fld76897Rj",
+      "field_type": "select",
+      "physical_type": "array<string>",
+      "stats": {
+        "empty_count": 2,
+        "max_length": 1,
+        "avg_length": 0.3333333333333333
+      },
+      "example": [
+        "降价售卖"
+      ]
+    },
+    "实际齐套数": {
+      "field_id": "fld6HJllY0",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 0,
+        "min": 0,
+        "max": 2,
+        "avg": 0.6666666666666666
+      },
+      "example": 0
+    },
+    "尾程": {
+      "field_id": "fldlhMmf1P",
+      "field_type": "lookup",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 2,
+        "max_length": 5
+      },
+      "example": "29.59"
+    },
+    "工厂不发货亏损": {
+      "field_id": "fldvLfw1DA",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 3
+      },
+      "hint": "All values are empty; type inference may be ambiguous. Avoid analyzing this column unless required."
+    },
+    "工厂发货决策": {
+      "field_id": "fldaIXxL0G",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 3,
+        "max_length": 0
+      },
+      "hint": "All values are empty; type inference may be ambiguous. Avoid analyzing this column unless required."
+    },
+    "工厂发货套数": {
+      "field_id": "fld6Rn4t99",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 0,
+        "min": 0,
+        "max": 0,
+        "avg": 0
+      },
+      "example": 0
+    },
+    "工厂未发货数量": {
+      "field_id": "fldETydQ9I",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 3
+      },
+      "hint": "All values are empty; type inference may be ambiguous. Avoid analyzing this column unless required."
+    },
+    "库龄": {
+      "field_id": "fldDbeKyTb",
+      "field_type": "lookup",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 7
+      },
+      "example": "151,151"
+    },
+    "报废成本": {
+      "field_id": "fldku1nkis",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 3
+      },
+      "hint": "All values are empty; type inference may be ambiguous. Avoid analyzing this column unless required."
+    },
+    "报废数量": {
+      "field_id": "fldtV58jOC",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 3
+      },
+      "hint": "All values are empty; type inference may be ambiguous. Avoid analyzing this column unless required."
+    },
+    "最优窗口期(天)": {
+      "field_id": "fldVGjqsT6",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 2,
+        "min": 13,
+        "max": 13,
+        "avg": 13
+      },
+      "example": 13
+    },
+    "最佳方案": {
+      "field_id": "fldKeLHJAM",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 2,
+        "max_length": 15
+      },
+      "example": "A线上降价出清(100%覆盖)"
+    },
+    "测试字段X": {
+      "field_id": "fldYnUmosY",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 3
+      },
+      "hint": "All values are empty; type inference may be ambiguous. Avoid analyzing this column unless required."
+    },
+    "海外仓库存总量": {
+      "field_id": "fldAaj5ADQ",
+      "field_type": "lookup",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 1
+      },
+      "example": "0"
+    },
+    "海外仓库存（非独立站）": {
+      "field_id": "fld4Meyej9",
+      "field_type": "lookup",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 1
+      },
+      "example": "0"
+    },
+    "清库标记": {
+      "field_id": "fldZzxe4ZR",
+      "field_type": "select",
+      "physical_type": "array<string>",
+      "stats": {
+        "empty_count": 3,
+        "max_length": 0,
+        "avg_length": 0
+      },
+      "hint": "All values are empty; type inference may be ambiguous. Avoid analyzing this column unless required."
+    },
+    "父记录": {
+      "field_id": "fldBemKqOS",
+      "field_type": "link",
+      "physical_type": "array<struct<id string>>",
+      "stats": {
+        "empty_count": 3,
+        "max_length": 0,
+        "avg_length": 0
+      },
+      "hint": "All values are empty; type inference may be ambiguous. Avoid analyzing this column unless required."
+    },
+    "父记录model": {
+      "field_id": "fldhjtcicJ",
+      "field_type": "lookup",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 3,
+        "max_length": 0
+      },
+      "hint": "All values are empty; type inference may be ambiguous. Avoid analyzing this column unless required."
+    },
+    "独立站渠道库存": {
+      "field_id": "fldMkf8hdf",
+      "field_type": "lookup",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 1
+      },
+      "example": "0"
+    },
+    "过去30天销量": {
+      "field_id": "fldnYmPQed",
+      "field_type": "formula",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 2
+      },
+      "example": "0"
+    },
+    "部件重量 lbs": {
+      "field_id": "fldmmR0Ed7",
+      "field_type": "formula",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 8
+      },
+      "example": "0"
+    },
+    "部件重量kg": {
+      "field_id": "fldlSjc3Cz",
+      "field_type": "lookup",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 4
+      },
+      "example": "35.5"
+    },
+    "采购价": {
+      "field_id": "fldmhrogrC",
+      "field_type": "lookup",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 5
+      },
+      "example": "42.00"
+    },
+    "采购价+头程": {
+      "field_id": "fldLBfXiuP",
+      "field_type": "formula",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 11
+      },
+      "example": "0"
+    },
+    "预计回收资金": {
+      "field_id": "fldbNMkSHj",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 0,
+        "min": 0,
+        "max": 209.99,
+        "avg": 69.99666666666667
+      },
+      "example": 0
+    }
+  }
+}

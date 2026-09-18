@@ -1,0 +1,176 @@
+{
+  "manifest_version": "v1",
+  "format": "ndjson",
+  "base_token": "HPsJbdMCva1IersNsFQco976n7B",
+  "table_id": "tblXNMVM0MNDgOzr",
+  "rev": 2,
+  "timezone": "Asia/Shanghai",
+  "query_context": {
+    "field_scope": "all_fields",
+    "record_scope": "all_records"
+  },
+  "requested_limit": 2000,
+  "records_count": 2,
+  "page_count": 1,
+  "has_more": false,
+  "record_file": "D:\\agents_project\\清库方案自动计算\\.workbuddy\\tmp_logcheck.ndjson",
+  "record_file_size_bytes": 770,
+  "manifest_file": "D:\\agents_project\\清库方案自动计算\\.workbuddy\\tmp_logcheck.manifest.json",
+  "columns": {
+    "A层套数": {
+      "field_id": "fldv8uRP6P",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 1,
+        "min": 234,
+        "max": 234,
+        "avg": 234
+      },
+      "example": 234
+    },
+    "B层套数": {
+      "field_id": "fldff8HDtw",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 1,
+        "min": 107,
+        "max": 107,
+        "avg": 107
+      },
+      "example": 107
+    },
+    "C层套数": {
+      "field_id": "fld37iMbHa",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 1,
+        "min": 0,
+        "max": 0,
+        "avg": 0
+      },
+      "example": 0
+    },
+    "record_id": {
+      "physical_type": "string",
+      "stats": {
+        "max_length": 14
+      },
+      "example": "recvvlxFi5YGlx"
+    },
+    "ΔK未清库": {
+      "field_id": "fldXeWbRAE",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 1,
+        "min": 2010,
+        "max": 2010,
+        "avg": 2010
+      },
+      "example": 2010
+    },
+    "关键参数": {
+      "field_id": "flddmRvjHO",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 1,
+        "max_length": 35
+      },
+      "example": "窗口30天；A降20%；B 1.5折；C 8折；推广30%；λ=1.0"
+    },
+    "场景名": {
+      "field_id": "fldM8HmiWL",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 1,
+        "max_length": 11
+      },
+      "example": "默认场景(代码默认值)"
+    },
+    "总齐套K": {
+      "field_id": "fld2Nalmf7",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 1,
+        "min": 2351,
+        "max": 2351,
+        "avg": 2351
+      },
+      "example": 2351
+    },
+    "报废成本USD": {
+      "field_id": "fldlCJos1o",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 1,
+        "min": 1945.92,
+        "max": 1945.92,
+        "avg": 1945.92
+      },
+      "example": 1945.92
+    },
+    "最优分布": {
+      "field_id": "fldfKJs7Vr",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 1,
+        "max_length": 43
+      },
+      "example": "B_线下清库×16 / A_降价卖×12 / C_激励方案×6 / 混合(A+B)×3"
+    },
+    "最优方案净额USD": {
+      "field_id": "fldylglBFL",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 1,
+        "min": 128926.98,
+        "max": 128926.98,
+        "avg": 128926.98
+      },
+      "example": 128926.98
+    },
+    "混合净额USD": {
+      "field_id": "fld6yjcTDY",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 1,
+        "min": 28967.47,
+        "max": 28967.47,
+        "avg": 28967.47
+      },
+      "example": 28967.47
+    },
+    "计提USD": {
+      "field_id": "fldWfoWY8A",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 1,
+        "min": 13041.96,
+        "max": 13041.96,
+        "avg": 13041.96
+      },
+      "example": 13041.96
+    },
+    "运行时间": {
+      "field_id": "fldwXiOfRg",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 16
+      },
+      "example": "debug"
+    }
+  }
+}

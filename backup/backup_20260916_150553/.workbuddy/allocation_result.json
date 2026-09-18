@@ -1,0 +1,1492 @@
+{
+  "allocations": [
+    {
+      "rank": 1,
+      "record_id": "recvuAqcP3MgnV",
+      "model": "AMESD02DW-V-US",
+      "type": "bom",
+      "K": 8.0,
+      "scope": [
+        "AMESD02B-F-US",
+        "AMESD02DW-C1-US"
+      ],
+      "consumed": {
+        "AMESD02B-F-US": [
+          {
+            "qty": 8.0,
+            "age": 111.0
+          }
+        ],
+        "AMESD02DW-C1-US": [
+          {
+            "qty": 8.0,
+            "age": 33.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 2,
+      "record_id": "recvuAqg4vIbRb",
+      "model": "AMESD04DW-V-US",
+      "type": "bom",
+      "K": 200.0,
+      "scope": [
+        "AMESD02B-F-US",
+        "AMESD04DW-C1-US",
+        "AMESD04DW-C2-US"
+      ],
+      "consumed": {
+        "AMESD02B-F-US": [
+          {
+            "qty": 71.0,
+            "age": 111.0
+          },
+          {
+            "qty": 129.0,
+            "age": 103.0
+          }
+        ],
+        "AMESD04DW-C1-US": [
+          {
+            "qty": 21.0,
+            "age": 96.0
+          },
+          {
+            "qty": 58.0,
+            "age": 49.0
+          },
+          {
+            "qty": 56.0,
+            "age": 35.0
+          },
+          {
+            "qty": 45.0,
+            "age": 29.0
+          },
+          {
+            "qty": 20.0,
+            "age": 12.0
+          }
+        ],
+        "AMESD04DW-C2-US": [
+          {
+            "qty": 10.0,
+            "age": 146.0
+          },
+          {
+            "qty": 39.0,
+            "age": 127.0
+          },
+          {
+            "qty": 18.0,
+            "age": 113.0
+          },
+          {
+            "qty": 27.0,
+            "age": 103.0
+          },
+          {
+            "qty": 100.0,
+            "age": 100.0
+          },
+          {
+            "qty": 6.0,
+            "age": 8.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 3,
+      "record_id": "recvuAqg4vwXI4",
+      "model": "AMESD01DW-V-US",
+      "type": "bom",
+      "K": 1.0,
+      "scope": [
+        "AMESD01DW-D-US",
+        "HNESD217B-US"
+      ],
+      "consumed": {
+        "AMESD01DW-D-US": [
+          {
+            "qty": 1.0,
+            "age": 180.0
+          }
+        ],
+        "HNESD217B-US": [
+          {
+            "qty": 1.0,
+            "age": 125.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 4,
+      "record_id": "recvuAqg4vF2nw",
+      "model": "AMESD04NW-V1-US",
+      "type": "bom",
+      "K": 25.0,
+      "scope": [
+        "AMESD02B-F-US",
+        "AMESD04NW-C1-US",
+        "AMESD04NW-C2-US"
+      ],
+      "consumed": {
+        "AMESD02B-F-US": [
+          {
+            "qty": 25.0,
+            "age": 103.0
+          }
+        ],
+        "AMESD04NW-C1-US": [
+          {
+            "qty": 25.0,
+            "age": 49.0
+          }
+        ],
+        "AMESD04NW-C2-US": [
+          {
+            "qty": 25.0,
+            "age": 254.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 5,
+      "record_id": "recvuAqg4v5eoL",
+      "model": "AMBFC03DW-US",
+      "type": "single",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 6,
+      "record_id": "recvuAqg4vjXTG",
+      "model": "AMBFC02DW-US",
+      "type": "single",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 7,
+      "record_id": "recvuAqg4vhxV0",
+      "model": "HNOFC39DN-LH-US",
+      "type": "single",
+      "K": 17.0,
+      "scope": [
+        "HNOFC39DN-LH-US"
+      ],
+      "consumed": {
+        "HNOFC39DN-LH-US": [
+          {
+            "qty": 17.0,
+            "age": 278.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 8,
+      "record_id": "recvuAqg4vEjy9",
+      "model": "PDESD267LW-V-US",
+      "type": "bom",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 9,
+      "record_id": "recvuAqg4v9DTA",
+      "model": "HNESD231DW-150A-V-US",
+      "type": "bom",
+      "K": 936.0,
+      "scope": [
+        "HNESD217B-US"
+      ],
+      "consumed": {
+        "HNESD217B-US": [
+          {
+            "qty": 105.0,
+            "age": 125.0
+          },
+          {
+            "qty": 160.0,
+            "age": 104.0
+          },
+          {
+            "qty": 45.0,
+            "age": 77.0
+          },
+          {
+            "qty": 124.0,
+            "age": 69.0
+          },
+          {
+            "qty": 35.0,
+            "age": 49.0
+          },
+          {
+            "qty": 107.0,
+            "age": 34.0
+          },
+          {
+            "qty": 250.0,
+            "age": 28.0
+          },
+          {
+            "qty": 110.0,
+            "age": 8.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 10,
+      "record_id": "recvuAqg4vFBqG",
+      "model": "PDESD263DW-V-US",
+      "type": "bom",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 11,
+      "record_id": "recvuAqg4vhX7Y",
+      "model": "PDESD268DW-V-US",
+      "type": "bom",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 12,
+      "record_id": "recvuAqg4vy5XU",
+      "model": "AMESD02LW-V-US",
+      "type": "bom",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 13,
+      "record_id": "recvuAqg4vGk1a",
+      "model": "AMESD01NR-V-US",
+      "type": "bom",
+      "K": 51.0,
+      "scope": [
+        "AMBFC04NR-C1-US",
+        "AMBFC04NR-C2-US"
+      ],
+      "consumed": {
+        "AMBFC04NR-C1-US": [
+          {
+            "qty": 19.0,
+            "age": 197.0
+          },
+          {
+            "qty": 32.0,
+            "age": 151.0
+          }
+        ],
+        "AMBFC04NR-C2-US": [
+          {
+            "qty": 16.0,
+            "age": 335.0
+          },
+          {
+            "qty": 13.0,
+            "age": 323.0
+          },
+          {
+            "qty": 22.0,
+            "age": 180.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 14,
+      "record_id": "recvuAqcP3LO1U",
+      "model": "AMESD02NR-V-US",
+      "type": "bom",
+      "K": 6.0,
+      "scope": [
+        "AMESD02B-F-US",
+        "AMESD02NR-C1-US",
+        "AMESD02NR-C2-US"
+      ],
+      "consumed": {
+        "AMESD02B-F-US": [
+          {
+            "qty": 6.0,
+            "age": 103.0
+          }
+        ],
+        "AMESD02NR-C1-US": [
+          {
+            "qty": 3.0,
+            "age": 70.0
+          },
+          {
+            "qty": 3.0,
+            "age": 49.0
+          }
+        ],
+        "AMESD02NR-C2-US": [
+          {
+            "qty": 6.0,
+            "age": 20.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 15,
+      "record_id": "recvuAqg4vr9RI",
+      "model": "PDESD263LW-V-US",
+      "type": "bom",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 16,
+      "record_id": "recvuAqg4vE1Ld",
+      "model": "PDESD269LW-V-US",
+      "type": "bom",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 17,
+      "record_id": "recvuAqg4vTtLZ",
+      "model": "HNOFC38DN-LH-US",
+      "type": "single",
+      "K": 205.0,
+      "scope": [
+        "HNOFC38DN-LH-US"
+      ],
+      "consumed": {
+        "HNOFC38DN-LH-US": [
+          {
+            "qty": 18.0,
+            "age": 278.0
+          },
+          {
+            "qty": 14.0,
+            "age": 246.0
+          },
+          {
+            "qty": 84.0,
+            "age": 92.0
+          },
+          {
+            "qty": 6.0,
+            "age": 91.0
+          },
+          {
+            "qty": 37.0,
+            "age": 52.0
+          },
+          {
+            "qty": 46.0,
+            "age": 48.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 18,
+      "record_id": "recvuAqg4vc4HN",
+      "model": "AMESD04NR-V-US",
+      "type": "bom",
+      "K": 7.0,
+      "scope": [
+        "AMESD02B-F-US",
+        "AMESD04NR-C1-US",
+        "AMESD04NR-C2-US"
+      ],
+      "consumed": {
+        "AMESD02B-F-US": [
+          {
+            "qty": 7.0,
+            "age": 103.0
+          }
+        ],
+        "AMESD04NR-C1-US": [
+          {
+            "qty": 7.0,
+            "age": 49.0
+          }
+        ],
+        "AMESD04NR-C2-US": [
+          {
+            "qty": 7.0,
+            "age": 125.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 19,
+      "record_id": "recvuAqg4vveie",
+      "model": "PDBFC03DW-US",
+      "type": "single",
+      "K": 73.0,
+      "scope": [
+        "PDBFC03DW-US"
+      ],
+      "consumed": {
+        "PDBFC03DW-US": [
+          {
+            "qty": 22.0,
+            "age": 23.0
+          },
+          {
+            "qty": 26.0,
+            "age": 15.0
+          },
+          {
+            "qty": 25.0,
+            "age": 15.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 20,
+      "record_id": "recvuAqg4vV7Hn",
+      "model": "AMBFC04DW-C2-US",
+      "type": "single",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 21,
+      "record_id": "recvuAqg4vVXxX",
+      "model": "MSESD52N-V-US",
+      "type": "bom",
+      "K": 51.0,
+      "scope": [
+        "MSESD52N-US"
+      ],
+      "consumed": {
+        "MSESD52N-US": [
+          {
+            "qty": 9.0,
+            "age": 382.0
+          },
+          {
+            "qty": 16.0,
+            "age": 356.0
+          },
+          {
+            "qty": 13.0,
+            "age": 307.0
+          },
+          {
+            "qty": 13.0,
+            "age": 307.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 22,
+      "record_id": "recvuAqg4vQ0dR",
+      "model": "AMESD04NW-V-US",
+      "type": "bom",
+      "K": 37.0,
+      "scope": [
+        "AMESD04NW-C2-US"
+      ],
+      "consumed": {
+        "AMESD04NW-C2-US": [
+          {
+            "qty": 20.0,
+            "age": 254.0
+          },
+          {
+            "qty": 5.0,
+            "age": 250.0
+          },
+          {
+            "qty": 12.0,
+            "age": 125.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 23,
+      "record_id": "recvuAqg4vQQ5r",
+      "model": "AMBFC02NW-US",
+      "type": "single",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 24,
+      "record_id": "recvuAqg4vFaYt",
+      "model": "HNESD225WN-160A-V1-US",
+      "type": "bom",
+      "K": 18.0,
+      "scope": [
+        "HNESD225WN-160A-US"
+      ],
+      "consumed": {
+        "HNESD225WN-160A-US": [
+          {
+            "qty": 6.0,
+            "age": 273.0
+          },
+          {
+            "qty": 7.0,
+            "age": 162.0
+          },
+          {
+            "qty": 2.0,
+            "age": 81.0
+          },
+          {
+            "qty": 3.0,
+            "age": 80.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 25,
+      "record_id": "recvuAqg4voY6u",
+      "model": "HNDS6",
+      "type": "single",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 26,
+      "record_id": "recvuAqg4vJPP6",
+      "model": "AMESD04W-V-US",
+      "type": "bom",
+      "K": 91.0,
+      "scope": [
+        "AMESD02B-F-US"
+      ],
+      "consumed": {
+        "AMESD02B-F-US": [
+          {
+            "qty": 91.0,
+            "age": 103.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 27,
+      "record_id": "recvuAqg4vKqDJ",
+      "model": "AMESD02W-V-US",
+      "type": "bom",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 28,
+      "record_id": "recvuAqg4v3qeN",
+      "model": "HNOFC44BN-US",
+      "type": "single",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 29,
+      "record_id": "recvuAqg4vklTm",
+      "model": "HNESD226WN-160A-V1-US",
+      "type": "bom",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 30,
+      "record_id": "recvuAqg4vE8DH",
+      "model": "AMESD01DW-V5-US",
+      "type": "bom",
+      "K": 1.0,
+      "scope": [
+        "AMESD01B-F-US"
+      ],
+      "consumed": {
+        "AMESD01B-F-US": [
+          {
+            "qty": 1.0,
+            "age": 125.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 31,
+      "record_id": "recvuAqg4vR0Lj",
+      "model": "AMESD01DW-V5-US",
+      "type": "bom",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 32,
+      "record_id": "recvuAqg4v8obb",
+      "model": "AMESD01W-V-US",
+      "type": "bom",
+      "K": 81.0,
+      "scope": [
+        "AMBFC04W-C2-US"
+      ],
+      "consumed": {
+        "AMBFC04W-C2-US": [
+          {
+            "qty": 4.0,
+            "age": 175.0
+          },
+          {
+            "qty": 2.0,
+            "age": 174.0
+          },
+          {
+            "qty": 1.0,
+            "age": 169.0
+          },
+          {
+            "qty": 74.0,
+            "age": 135.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 33,
+      "record_id": "recvuAqg4vLb2S",
+      "model": "PDESD268LW-V-US",
+      "type": "bom",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 34,
+      "record_id": "recvuAqg4vAcKY",
+      "model": "AMBFC01NR-US",
+      "type": "single",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 35,
+      "record_id": "recvuAqg4vzvEz",
+      "model": "AMBFC04DW-C1-US",
+      "type": "single",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 36,
+      "record_id": "recvuAqg4vCQ2Q",
+      "model": "AMBFC06NW-US",
+      "type": "single",
+      "K": 22.0,
+      "scope": [
+        "AMBFC06NW-US"
+      ],
+      "consumed": {
+        "AMBFC06NW-US": [
+          {
+            "qty": 22.0,
+            "age": 70.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 37,
+      "record_id": "recvuAqcP3A2Da",
+      "model": "AMBFC05NR-US",
+      "type": "single",
+      "K": 3.0,
+      "scope": [
+        "AMBFC05NR-US"
+      ],
+      "consumed": {
+        "AMBFC05NR-US": [
+          {
+            "qty": 3.0,
+            "age": 149.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 38,
+      "record_id": "recvuAqg4vqgC0",
+      "model": "AMBFC04NR-C2-US",
+      "type": "single",
+      "K": 75.0,
+      "scope": [
+        "AMBFC04NR-C2-US"
+      ],
+      "consumed": {
+        "AMBFC04NR-C2-US": [
+          {
+            "qty": 33.0,
+            "age": 180.0
+          },
+          {
+            "qty": 26.0,
+            "age": 151.0
+          },
+          {
+            "qty": 16.0,
+            "age": 125.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 39,
+      "record_id": "recvuAqg4vCfBw",
+      "model": "AMBFC04NW-C2-US",
+      "type": "single",
+      "K": 33.0,
+      "scope": [
+        "AMBFC04NW-C2-US"
+      ],
+      "consumed": {
+        "AMBFC04NW-C2-US": [
+          {
+            "qty": 6.0,
+            "age": 323.0
+          },
+          {
+            "qty": 27.0,
+            "age": 133.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 40,
+      "record_id": "recvuAqg4vP1mr",
+      "model": "AMBFC05NR-US",
+      "type": "single",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 41,
+      "record_id": "recvuAqg4vKwaw",
+      "model": "AMBFC04NR-C2-US",
+      "type": "single",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 42,
+      "record_id": "recvuAqg4vo81h",
+      "model": "AMBFC04NW-C2-US",
+      "type": "single",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 43,
+      "record_id": "recvuAqg4vV6a9",
+      "model": "HNESD213LW-120A-V-US",
+      "type": "bom",
+      "K": 65.0,
+      "scope": [
+        "HNESD213LW-120A-US"
+      ],
+      "consumed": {
+        "HNESD213LW-120A-US": [
+          {
+            "qty": 63.0,
+            "age": 335.0
+          },
+          {
+            "qty": 2.0,
+            "age": 133.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 44,
+      "record_id": "recvuAqg4vj3iz",
+      "model": "PDBFC09DW-US",
+      "type": "single",
+      "K": 30.0,
+      "scope": [
+        "PDBFC09DW-US"
+      ],
+      "consumed": {
+        "PDBFC09DW-US": [
+          {
+            "qty": 7.0,
+            "age": 139.0
+          },
+          {
+            "qty": 23.0,
+            "age": 108.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 45,
+      "record_id": "recvuAqg4vrNim",
+      "model": "HNESD230DW-160A-V-US",
+      "type": "bom",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 46,
+      "record_id": "recvuAqg4v4HLA",
+      "model": "PDBFC02W-US",
+      "type": "bom",
+      "K": 3.0,
+      "scope": [
+        "PDBFC02W-US"
+      ],
+      "consumed": {
+        "PDBFC02W-US": [
+          {
+            "qty": 3.0,
+            "age": 202.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 47,
+      "record_id": "recvuAqg4vwv6s",
+      "model": "PDBFC04LW-US",
+      "type": "single",
+      "K": 3.0,
+      "scope": [
+        "PDBFC04LW-US"
+      ],
+      "consumed": {
+        "PDBFC04LW-US": [
+          {
+            "qty": 2.0,
+            "age": 72.0
+          },
+          {
+            "qty": 1.0,
+            "age": 71.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 48,
+      "record_id": "recvuAqg4vVLf6",
+      "model": "PDBFC08W-T-V-US",
+      "type": "bom",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 49,
+      "record_id": "recvuAqg4vHGrZ",
+      "model": "AMBFC04NR-V-US",
+      "type": "bom",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 50,
+      "record_id": "recvuAqg4vpYFy",
+      "model": "AMBFC04NR-C1-US",
+      "type": "single",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 51,
+      "record_id": "recvuAqg4vxHGQ",
+      "model": "AMBFC04NR-C1-US",
+      "type": "single",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 52,
+      "record_id": "recvuAqg4vgvxR",
+      "model": "AMESD01NR-V5-US",
+      "type": "bom",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 53,
+      "record_id": "recvuAqg4vCzQj",
+      "model": "PDBFC10DW-US",
+      "type": "single",
+      "K": 22.0,
+      "scope": [
+        "PDBFC10DW-US"
+      ],
+      "consumed": {
+        "PDBFC10DW-US": [
+          {
+            "qty": 2.0,
+            "age": 139.0
+          },
+          {
+            "qty": 15.0,
+            "age": 103.0
+          },
+          {
+            "qty": 5.0,
+            "age": 98.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 54,
+      "record_id": "recvuAqg4va6d8",
+      "model": "HNSS6",
+      "type": "single",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 55,
+      "record_id": "recvuAqg4v2L6p",
+      "model": "HNESD216LW-140A-V-US",
+      "type": "bom",
+      "K": 5.0,
+      "scope": [
+        "HNESD216LW-140A-US"
+      ],
+      "consumed": {
+        "HNESD216LW-140A-US": [
+          {
+            "qty": 2.0,
+            "age": 338.0
+          },
+          {
+            "qty": 3.0,
+            "age": 96.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 56,
+      "record_id": "recvuAqcP3NAg6",
+      "model": "AMESD01NW-V-US",
+      "type": "bom",
+      "K": 10.0,
+      "scope": [
+        "AMESD01NW-D-US"
+      ],
+      "consumed": {
+        "AMESD01NW-D-US": [
+          {
+            "qty": 3.0,
+            "age": 256.0
+          },
+          {
+            "qty": 7.0,
+            "age": 113.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 57,
+      "record_id": "recvuAqcP3wxtr",
+      "model": "AMESD01NW-V-US",
+      "type": "bom",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 58,
+      "record_id": "recvuAqg4vTJOd",
+      "model": "AMESD02NW-V-US",
+      "type": "bom",
+      "K": 2.0,
+      "scope": [
+        "AMESD02NW-C1-US",
+        "AMESD02NW-C2-US"
+      ],
+      "consumed": {
+        "AMESD02NW-C1-US": [
+          {
+            "qty": 2.0,
+            "age": 253.0
+          }
+        ],
+        "AMESD02NW-C2-US": [
+          {
+            "qty": 2.0,
+            "age": 253.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 59,
+      "record_id": "recvuAqg4v2NHX",
+      "model": "PDBFC03NW-US",
+      "type": "single",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 60,
+      "record_id": "recvuAqg4vc7el",
+      "model": "AMESD01NW-V5-US",
+      "type": "bom",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 61,
+      "record_id": "recvuAqg4vzAOI",
+      "model": "PDBFC01NW-US",
+      "type": "bom",
+      "K": 1.0,
+      "scope": [
+        "PDBFC01NW-US"
+      ],
+      "consumed": {
+        "PDBFC01NW-US": [
+          {
+            "qty": 1.0,
+            "age": 359.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 62,
+      "record_id": "recvuAqg4v3l5k",
+      "model": "AMESD04W-V1-US",
+      "type": "bom",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 63,
+      "record_id": "recvuAqg4vPblg",
+      "model": "AMESD01NW-V-US",
+      "type": "bom",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 64,
+      "record_id": "recvuAqg4vIf33",
+      "model": "PDBFC12LW-US",
+      "type": "single",
+      "K": 54.0,
+      "scope": [
+        "PDBFC12LW-US"
+      ],
+      "consumed": {
+        "PDBFC12LW-US": [
+          {
+            "qty": 15.0,
+            "age": 145.0
+          },
+          {
+            "qty": 6.0,
+            "age": 120.0
+          },
+          {
+            "qty": 19.0,
+            "age": 91.0
+          },
+          {
+            "qty": 14.0,
+            "age": 77.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 65,
+      "record_id": "recvuAqg4vYBzJ",
+      "model": "PDBFC10LW-US",
+      "type": "single",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 66,
+      "record_id": "recvuAqg4vo87X",
+      "model": "PDBFC09LW-US",
+      "type": "single",
+      "K": 30.0,
+      "scope": [
+        "PDBFC09LW-US"
+      ],
+      "consumed": {
+        "PDBFC09LW-US": [
+          {
+            "qty": 3.0,
+            "age": 135.0
+          },
+          {
+            "qty": 27.0,
+            "age": 83.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 67,
+      "record_id": "recvuAqg4v5Tis",
+      "model": "PDBFC08W-Q-V-US",
+      "type": "bom",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 68,
+      "record_id": "recvuAqg4v4yQC",
+      "model": "PDBFC08W-F-V-US",
+      "type": "bom",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 69,
+      "record_id": "recvuAqg4vB6ep",
+      "model": "AMBFC06W-US",
+      "type": "single",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 70,
+      "record_id": "recvuAqg4vFule",
+      "model": "HNESD224WN-160A-V1-US",
+      "type": "bom",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 71,
+      "record_id": "recvuAqg4v7P7w",
+      "model": "AMBFC04NW-C1-US",
+      "type": "single",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 72,
+      "record_id": "recvuAqg4vFiNC",
+      "model": "AMBFC04LW-C1-US",
+      "type": "single",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 73,
+      "record_id": "recvuAqg4vMol8",
+      "model": "PDBFC03LW-US",
+      "type": "single",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 74,
+      "record_id": "recvuAqg4voiYf",
+      "model": "AMBFC05LW-US",
+      "type": "single",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 75,
+      "record_id": "recvuAqg4vejx5",
+      "model": "PDBFC10NW-US",
+      "type": "single",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 76,
+      "record_id": "recvuAqg4vSWkS",
+      "model": "PDBFC09NW-US",
+      "type": "single",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 77,
+      "record_id": "recvuAqg4vyO7g",
+      "model": "PDBFC12NW-US",
+      "type": "single",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 78,
+      "record_id": "recvuAqg4v3QZF",
+      "model": "HNDS37B-US",
+      "type": "single",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 79,
+      "record_id": "recvuAqg4vMeuq",
+      "model": "HNESD224N-160A-V-US",
+      "type": "bom",
+      "K": 1.0,
+      "scope": [
+        "HNESD224N-160A-US"
+      ],
+      "consumed": {
+        "HNESD224N-160A-US": [
+          {
+            "qty": 1.0,
+            "age": 85.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 80,
+      "record_id": "recvuAqg4vKV2b",
+      "model": "HNESD224N-160A-V1-US",
+      "type": "bom",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 81,
+      "record_id": "recvuAqg4vTCzV",
+      "model": "HNESD224WN-160A-V-US",
+      "type": "bom",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 82,
+      "record_id": "recvuAqg4vV3o4",
+      "model": "HNESD225WN-160A-V-US",
+      "type": "bom",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 83,
+      "record_id": "recvuAqg4vSrnb",
+      "model": "HNESD226N-160A-V-US",
+      "type": "bom",
+      "K": 3.0,
+      "scope": [
+        "HNESD226N-160A-US"
+      ],
+      "consumed": {
+        "HNESD226N-160A-US": [
+          {
+            "qty": 3.0,
+            "age": 92.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 84,
+      "record_id": "recvuAqg4v64AD",
+      "model": "HNESD226N-160A-V1-US",
+      "type": "bom",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 85,
+      "record_id": "recvuAqg4vXnCA",
+      "model": "HNESD226WN-160A-V-US",
+      "type": "bom",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 86,
+      "record_id": "recvuAqg4vqpoo",
+      "model": "HNGD01B-US",
+      "type": "single",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 87,
+      "record_id": "recvuAqg4vJ3Ev",
+      "model": "HNSS43B-US",
+      "type": "single",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    },
+    {
+      "rank": 88,
+      "record_id": "recvuAqg4vw2A1",
+      "model": "HNSS44B-US",
+      "type": "single",
+      "K": 1.0,
+      "scope": [
+        "HNSS44B-US"
+      ],
+      "consumed": {
+        "HNSS44B-US": [
+          {
+            "qty": 1.0,
+            "age": 316.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 89,
+      "record_id": "recvuAqg4vYwSh",
+      "model": "HNOFC42BN-US",
+      "type": "single",
+      "K": 173.0,
+      "scope": [
+        "HNOFC42BN-US"
+      ],
+      "consumed": {
+        "HNOFC42BN-US": [
+          {
+            "qty": 46.0,
+            "age": 154.0
+          },
+          {
+            "qty": 1.0,
+            "age": 152.0
+          },
+          {
+            "qty": 126.0,
+            "age": 141.0
+          }
+        ]
+      }
+    },
+    {
+      "rank": 90,
+      "record_id": "recvuAQODlq9Sf",
+      "model": null,
+      "type": "single",
+      "K": 0,
+      "scope": [],
+      "consumed": {}
+    }
+  ],
+  "longboards": [
+    {
+      "model": "AMESD02NW-C1-US",
+      "remaining": 14.0,
+      "batches": [
+        {
+          "qty": 9.0,
+          "age": 253.0
+        },
+        {
+          "qty": 5.0,
+          "age": 252.0
+        }
+      ],
+      "is_single_main": false
+    },
+    {
+      "model": "AMESD02NR-C2-US",
+      "remaining": 1.0,
+      "batches": [
+        {
+          "qty": 1.0,
+          "age": 7.0
+        }
+      ],
+      "is_single_main": false
+    },
+    {
+      "model": "AMESD04DW-C2-US",
+      "remaining": 11.0,
+      "batches": [
+        {
+          "qty": 11.0,
+          "age": 8.0
+        }
+      ],
+      "is_single_main": false
+    },
+    {
+      "model": "AMESD04NR-C2-US",
+      "remaining": 11.0,
+      "batches": [
+        {
+          "qty": 11.0,
+          "age": 125.0
+        }
+      ],
+      "is_single_main": false
+    }
+  ]
+}

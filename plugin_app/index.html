@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>清库方案自动测算</title>
+  <style>
+    :root {
+      --primary: #3370ff;
+      --primary-hover: #265bd9;
+      --success: #34c724;
+      --danger: #f54a45;
+      --warning: #ff7d00;
+      --bg: #f5f6f7;
+      --card-bg: #ffffff;
+      --text-main: #1f2329;
+      --text-sub: #646a73;
+      --border: #dee0e3;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+    body { background-color: var(--bg); color: var(--text-main); padding: 16px; font-size: 13px; line-height: 1.5; }
+    .header { margin-bottom: 12px; }
+    .title { font-size: 16px; font-weight: 600; color: var(--text-main); display: flex; align-items: center; gap: 6px; }
+    .subtitle { font-size: 12px; color: var(--text-sub); margin-top: 4px; }
+    
+    .card { background: var(--card-bg); border-radius: 8px; border: 1px solid var(--border); padding: 14px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
+    .card-title { font-size: 13px; font-weight: 600; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+    
+    .form-group { margin-bottom: 12px; }
+    .form-label { font-size: 12px; font-weight: 500; color: var(--text-main); margin-bottom: 6px; display: block; }
+    .select-input { width: 100%; padding: 8px 10px; border-radius: 6px; border: 1px solid var(--border); background: #fff; font-size: 13px; color: var(--text-main); outline: none; }
+    .select-input:focus { border-color: var(--primary); }
+    
+    .btn-run { width: 100%; padding: 10px; background: var(--primary); color: #fff; border: none; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .btn-run:hover { background: var(--primary-hover); }
+    .btn-run:disabled { background: #bbbfc4; cursor: not-allowed; }
+    
+    .log-container { background: #1b1f23; color: #adbac7; border-radius: 6px; padding: 10px; font-family: monospace; font-size: 11px; height: 160px; overflow-y: auto; white-space: pre-wrap; word-break: break-all; }
+    .log-entry { margin-bottom: 4px; line-height: 1.4; }
+    .log-info { color: #539bf5; }
+    .log-success { color: #57ab5a; }
+    .log-warn { color: #c69026; }
+    .log-error { color: #e5534b; }
+    
+    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+    .stat-item { background: var(--bg); padding: 8px; border-radius: 6px; }
+    .stat-label { font-size: 11px; color: var(--text-sub); }
+    .stat-val { font-size: 15px; font-weight: 600; color: var(--text-main); margin-top: 2px; }
+    
+    .badge { padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: normal; }
+    .badge-ok { background: #e8ffea; color: #167a26; }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="title">📦 清库方案自动测算</div>
+    <div class="subtitle">BOM瀑布流齐套 · 5方案动态对比 · 一键写回</div>
+  </div>
+
+  <div class="card">
+    <div class="form-group">
+      <label class="form-label" for="borrowMode">齐套库存模式</label>
+      <select id="borrowMode" class="select-input">
+        <option value="borrow" selected>允许跨渠道借调 (借非独立站海外仓拼齐套，最大化出清)</option>
+        <option value="dtc_only">严格仅限独立站 (只消耗独立站自存子件，不借外料)</option>
+      </select>
+    </div>
+    <button id="runBtn" class="btn-run" onclick="window.startExecution()">
+      <span>🚀 开始一键全自动测算</span>
+    </button>
+  </div>
+
+  <div class="card" id="resultCard" style="display: none;">
+    <div class="card-title">
+      <span>📊 最新测算概览</span>
+      <span class="badge badge-ok">测算完成</span>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-item">
+        <div class="stat-label">总可齐套套数 K</div>
+        <div class="stat-val" id="statK">-</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-label">长版报废成本</div>
+        <div class="stat-val" id="statScrap" style="color: var(--danger);">-</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-label">各款最优组合净额</div>
+        <div class="stat-val" id="statBestNet" style="color: var(--success);">-</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-label">写回主 Model 款数</div>
+        <div class="stat-val" id="statModels">-</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span>📝 运行控制台日志</span>
+      <button style="background:none;border:none;color:var(--primary);font-size:11px;cursor:pointer;" onclick="window.clearLogs()">清空日志</button>
+    </div>
+    <div id="logBox" class="log-container">
+      <div class="log-entry log-info">准备就绪，选择模式后点击上方按钮开始测算...</div>
+    </div>
+  </div>
+
+  <!-- 载入打包好的完整独立脚本 (?v= 版本号: 部署后强制刷新 CDN 缓存, 每次发版递增)
+       v=20260918c: 修复写回段三处缺陷 — ① bitable.FieldType undefined 报错 (改用顶层 FieldType 导入)
+       ② windowStats 未声明 ReferenceError ③ globalBestWindow TDZ (使用先于声明); 并将字段元信息
+       读取从 deprecated getFieldList()(无 .name) 迁移到 getFieldMetaList()
+       v=20260918d: 新增「最优窗口方案」字段 — 最优窗口 W* 下的方案构成说明 (与最优窗口期字段配套),
+       同一 model 在 W* 与当前窗口下方案可能不同; 三端同步 (scenarios.py / src_app.js / base_script.js) -->
+  <script src="./bundle.js?v=20260918d"></script>
+</body>
+</html>

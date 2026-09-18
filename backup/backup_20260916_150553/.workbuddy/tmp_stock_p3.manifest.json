@@ -1,0 +1,206 @@
+{
+  "manifest_version": "v1",
+  "format": "ndjson",
+  "base_token": "HPsJbdMCva1IersNsFQco976n7B",
+  "table_id": "tblNnE4WXy0esyGt",
+  "rev": 1269,
+  "timezone": "Asia/Shanghai",
+  "query_context": {
+    "field_scope": "all_fields",
+    "record_scope": "all_records"
+  },
+  "offset": 4000,
+  "requested_limit": 2000,
+  "records_count": 2000,
+  "page_count": 4,
+  "has_more": true,
+  "next_offset": 6000,
+  "record_file": "D:\\agents_project\\清库方案自动计算\\.workbuddy\\tmp_stock_p3.ndjson",
+  "record_file_size_bytes": 1078444,
+  "manifest_file": "D:\\agents_project\\清库方案自动计算\\.workbuddy\\tmp_stock_p3.manifest.json",
+  "columns": {
+    "SourceID": {
+      "field_id": "fldyF4FVat",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 80
+      },
+      "example": "NzY4MzgxMjYxNzg3MzM0NTc4Mzo0MDAxOjdiOGRlZjZiMDdjNGE5OTQ1NDVjZDE0MDk2YTBjYzgwOjE="
+    },
+    "item": {
+      "field_id": "fldmg6lEGB",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 1,
+        "max_length": 13
+      },
+      "example": "EMMS01AEN001"
+    },
+    "model": {
+      "field_id": "fldkuLEoco",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 249,
+        "max_length": 22
+      },
+      "example": "S13"
+    },
+    "record_id": {
+      "physical_type": "string",
+      "stats": {
+        "max_length": 14
+      },
+      "example": "recvrcT76bYgBZ"
+    },
+    "sku_name": {
+      "field_id": "fldytnba6t",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 1,
+        "max_length": 77
+      },
+      "example": "框架"
+    },
+    "一级类目": {
+      "field_id": "fldcB1htvy",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 1,
+        "max_length": 35
+      },
+      "example": "家居类 Home"
+    },
+    "三级类目": {
+      "field_id": "fld4nNDqVl",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 1,
+        "max_length": 33
+      },
+      "example": "AVF"
+    },
+    "二级类目": {
+      "field_id": "fldbvtKyHZ",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 1,
+        "max_length": 33
+      },
+      "example": "AVF"
+    },
+    "仓库区域": {
+      "field_id": "fld1RpTO2y",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 933,
+        "max_length": 3
+      },
+      "example": "美东"
+    },
+    "仓库名称": {
+      "field_id": "fldbYgTTZ2",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 15
+      },
+      "example": "WYF仓"
+    },
+    "仓库类型": {
+      "field_id": "fldf1aqpJK",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 3
+      },
+      "example": "海外仓"
+    },
+    "可用量": {
+      "field_id": "fldTKLvIMV",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 0,
+        "min": 1,
+        "max": 47634,
+        "avg": 316.788
+      },
+      "example": 5
+    },
+    "国家": {
+      "field_id": "fld9y6Fvng",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 249,
+        "max_length": 2
+      },
+      "example": "US"
+    },
+    "在途库存": {
+      "field_id": "flduol3LLJ",
+      "field_type": "lookup",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 3
+      },
+      "example": "0"
+    },
+    "库龄": {
+      "field_id": "flddykNYwr",
+      "field_type": "lookup",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 3
+      },
+      "example": "8"
+    },
+    "库龄(程序拉取)": {
+      "field_id": "fldsvM6Hx6",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 847,
+        "min": 0,
+        "max": 635,
+        "avg": 82.05984388551605
+      },
+      "example": 5
+    },
+    "所属团队": {
+      "field_id": "flda62Pbos",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 249,
+        "max_length": 14
+      },
+      "example": "QVC"
+    },
+    "行号": {
+      "field_id": "fldoOgdMW5",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 0,
+        "min": 4001,
+        "max": 6000,
+        "avg": 5000.5
+      },
+      "example": 4001
+    }
+  }
+}

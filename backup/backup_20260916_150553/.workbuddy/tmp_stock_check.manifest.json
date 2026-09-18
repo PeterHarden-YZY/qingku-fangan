@@ -1,0 +1,204 @@
+{
+  "manifest_version": "v1",
+  "format": "ndjson",
+  "base_token": "HPsJbdMCva1IersNsFQco976n7B",
+  "table_id": "tblNnE4WXy0esyGt",
+  "rev": 866,
+  "timezone": "Asia/Shanghai",
+  "query_context": {
+    "field_scope": "all_fields",
+    "record_scope": "filtered_records"
+  },
+  "requested_limit": 2000,
+  "records_count": 1,
+  "page_count": 1,
+  "has_more": false,
+  "record_file": "D:\\agents_project\\清库方案自动计算\\.workbuddy\\tmp_stock_check.ndjson",
+  "record_file_size_bytes": 570,
+  "manifest_file": "D:\\agents_project\\清库方案自动计算\\.workbuddy\\tmp_stock_check.manifest.json",
+  "columns": {
+    "SourceID": {
+      "field_id": "fldyF4FVat",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 80
+      },
+      "example": "NzY4MzgxMjYxNzg3MzM0NTc4MzoxMTgyOjA1N2ZmOTdhNzc5N2ZiM2UyMTAyNGE2YTQ4MzdjZjZjOjE="
+    },
+    "item": {
+      "field_id": "fldmg6lEGB",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 13
+      },
+      "example": "C415154371101"
+    },
+    "model": {
+      "field_id": "fldkuLEoco",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 13
+      },
+      "example": "AMESD01B-F-US"
+    },
+    "record_id": {
+      "physical_type": "string",
+      "stats": {
+        "max_length": 14
+      },
+      "example": "recvfBNVxbAQEh"
+    },
+    "sku_name": {
+      "field_id": "fldytnba6t",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 9
+      },
+      "example": "48寸桌1-框架包"
+    },
+    "一级类目": {
+      "field_id": "fldcB1htvy",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 28
+      },
+      "example": "办公类 Home and Office Products"
+    },
+    "三级类目": {
+      "field_id": "fld4nNDqVl",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 28
+      },
+      "example": "落地升降桌 Electric Standing Desk"
+    },
+    "二级类目": {
+      "field_id": "fldbvtKyHZ",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 21
+      },
+      "example": "办公家具 Office Furniture"
+    },
+    "仓库区域": {
+      "field_id": "fld1RpTO2y",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 3
+      },
+      "example": "美东南"
+    },
+    "仓库名称": {
+      "field_id": "fldbYgTTZ2",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 8
+      },
+      "example": "CUSATL01"
+    },
+    "仓库类型": {
+      "field_id": "fldf1aqpJK",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 3
+      },
+      "example": "海外仓"
+    },
+    "可用量": {
+      "field_id": "fldTKLvIMV",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 0,
+        "min": 1,
+        "max": 1,
+        "avg": 1
+      },
+      "example": 1
+    },
+    "国家": {
+      "field_id": "fld9y6Fvng",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 2
+      },
+      "example": "US"
+    },
+    "在途库存": {
+      "field_id": "flduol3LLJ",
+      "field_type": "lookup",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 1
+      },
+      "example": "0"
+    },
+    "库龄": {
+      "field_id": "flddykNYwr",
+      "field_type": "lookup",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 3
+      },
+      "example": "182"
+    },
+    "库龄(程序拉取)": {
+      "field_id": "fldsvM6Hx6",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 0,
+        "min": 123,
+        "max": 123,
+        "avg": 123
+      },
+      "example": 123
+    },
+    "所属团队": {
+      "field_id": "flda62Pbos",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 3
+      },
+      "example": "独立站"
+    },
+    "行号": {
+      "field_id": "fldoOgdMW5",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 0,
+        "min": 1182,
+        "max": 1182,
+        "avg": 1182
+      },
+      "example": 1182
+    }
+  }
+}

@@ -1,0 +1,352 @@
+{
+  "params": {
+    "scenario": "默认场景(代码默认值)",
+    "scrap_fee_light": 2.0,
+    "scrap_fee_heavy": 3.0,
+    "weight_threshold": 50.0
+  },
+  "items": [
+    {
+      "model": "AMESD01NW-D-US",
+      "record_id": "recvuAGRasBiy5",
+      "is_single_main": false,
+      "scrap_qty": 9.0,
+      "purchase_first_leg": 16.493796,
+      "weight_lbs": 21.2525368,
+      "disposal_fee": 2.0,
+      "unit_scrap_cost": 18.493796,
+      "scrap_cost": 166.444164,
+      "batches": [
+        {
+          "qty": 2.0,
+          "age": 258.0,
+          "is_dtc": true
+        },
+        {
+          "qty": 7.0,
+          "age": 115.0,
+          "is_dtc": true
+        }
+      ]
+    },
+    {
+      "model": "AMESD02B-F-US",
+      "record_id": "recvuAGRasiR1R",
+      "is_single_main": false,
+      "scrap_qty": 121.0,
+      "purchase_first_leg": 43.83062691,
+      "weight_lbs": 31.415835,
+      "disposal_fee": 2.0,
+      "unit_scrap_cost": 45.83062691,
+      "scrap_cost": 5545.5058561099995,
+      "batches": [
+        {
+          "qty": 121.0,
+          "age": 105.0,
+          "is_dtc": true
+        }
+      ]
+    },
+    {
+      "model": "AMESD02NW-C1-US",
+      "record_id": "recvuAGRas580V",
+      "is_single_main": false,
+      "scrap_qty": 14.0,
+      "purchase_first_leg": 50.7716143,
+      "weight_lbs": 42.99009,
+      "disposal_fee": 2.0,
+      "unit_scrap_cost": 52.7716143,
+      "scrap_cost": 738.8026002,
+      "batches": [
+        {
+          "qty": 10.0,
+          "age": 255.0,
+          "is_dtc": true
+        },
+        {
+          "qty": 4.0,
+          "age": 254.0,
+          "is_dtc": true
+        }
+      ]
+    },
+    {
+      "model": "AMESD04NW-C1-US",
+      "record_id": "recvuAGRascgVi",
+      "is_single_main": false,
+      "scrap_qty": 38.0,
+      "purchase_first_leg": 49.20387324,
+      "weight_lbs": 76.05939,
+      "disposal_fee": 3.0,
+      "unit_scrap_cost": 52.20387324,
+      "scrap_cost": 1983.74718312,
+      "batches": [
+        {
+          "qty": 25.0,
+          "age": 51.0,
+          "is_dtc": true
+        },
+        {
+          "qty": 13.0,
+          "age": 7.0,
+          "is_dtc": true
+        }
+      ]
+    },
+    {
+      "model": "AMESD04NW-C2-US",
+      "record_id": "recvuAGRasLaFp",
+      "is_single_main": false,
+      "scrap_qty": 63.0,
+      "purchase_first_leg": 48.93619857,
+      "weight_lbs": 53.131342,
+      "disposal_fee": 3.0,
+      "unit_scrap_cost": 51.93619857,
+      "scrap_cost": 3271.98050991,
+      "batches": [
+        {
+          "qty": 45.0,
+          "age": 256.0,
+          "is_dtc": true
+        },
+        {
+          "qty": 6.0,
+          "age": 252.0,
+          "is_dtc": true
+        },
+        {
+          "qty": 12.0,
+          "age": 127.0,
+          "is_dtc": true
+        }
+      ]
+    },
+    {
+      "model": "AMBFC04W-C2-US",
+      "record_id": "recvuAGRasHWcq",
+      "is_single_main": false,
+      "scrap_qty": 81.0,
+      "purchase_first_leg": 46.46353189,
+      "weight_lbs": 65.477214,
+      "disposal_fee": 3.0,
+      "unit_scrap_cost": 49.46353189,
+      "scrap_cost": 4006.5460830899997,
+      "batches": [
+        {
+          "qty": 4.0,
+          "age": 177.0,
+          "is_dtc": true
+        },
+        {
+          "qty": 2.0,
+          "age": 176.0,
+          "is_dtc": true
+        },
+        {
+          "qty": 1.0,
+          "age": 171.0,
+          "is_dtc": true
+        },
+        {
+          "qty": 74.0,
+          "age": 137.0,
+          "is_dtc": true
+        }
+      ]
+    },
+    {
+      "model": "HNESD225WN-160A-US",
+      "record_id": "recvuAGRas288x",
+      "is_single_main": false,
+      "scrap_qty": 18.0,
+      "purchase_first_leg": 57.0022671,
+      "weight_lbs": 91.5137762,
+      "disposal_fee": 3.0,
+      "unit_scrap_cost": 60.0022671,
+      "scrap_cost": 1080.0408078,
+      "batches": [
+        {
+          "qty": 6.0,
+          "age": 275.0,
+          "is_dtc": true
+        },
+        {
+          "qty": 7.0,
+          "age": 164.0,
+          "is_dtc": true
+        },
+        {
+          "qty": 2.0,
+          "age": 83.0,
+          "is_dtc": true
+        },
+        {
+          "qty": 3.0,
+          "age": 82.0,
+          "is_dtc": true
+        }
+      ]
+    },
+    {
+      "model": "HNESD224N-160A-US",
+      "record_id": "recvuAGRaswA9u",
+      "is_single_main": false,
+      "scrap_qty": 1.0,
+      "purchase_first_leg": 35.89638839,
+      "weight_lbs": 64.6394584,
+      "disposal_fee": 3.0,
+      "unit_scrap_cost": 38.89638839,
+      "scrap_cost": 38.89638839,
+      "batches": [
+        {
+          "qty": 1.0,
+          "age": 87.0,
+          "is_dtc": true
+        }
+      ]
+    },
+    {
+      "model": "HNESD213LW-120A-US",
+      "record_id": "recvuAGRatAuvd",
+      "is_single_main": false,
+      "scrap_qty": 65.0,
+      "purchase_first_leg": 49.41655221,
+      "weight_lbs": 56.438272,
+      "disposal_fee": 3.0,
+      "unit_scrap_cost": 52.41655221,
+      "scrap_cost": 3407.07589365,
+      "batches": [
+        {
+          "qty": 63.0,
+          "age": 337.0,
+          "is_dtc": true
+        },
+        {
+          "qty": 2.0,
+          "age": 135.0,
+          "is_dtc": true
+        }
+      ]
+    },
+    {
+      "model": "HNESD216LW-140A-US",
+      "record_id": "recvuAGRat96G0",
+      "is_single_main": false,
+      "scrap_qty": 5.0,
+      "purchase_first_leg": 78.79786377,
+      "weight_lbs": 79.36632,
+      "disposal_fee": 3.0,
+      "unit_scrap_cost": 81.79786377,
+      "scrap_cost": 408.98931885,
+      "batches": [
+        {
+          "qty": 2.0,
+          "age": 340.0,
+          "is_dtc": true
+        },
+        {
+          "qty": 3.0,
+          "age": 98.0,
+          "is_dtc": true
+        }
+      ]
+    },
+    {
+      "model": "AMESD02DW-C1-US",
+      "record_id": "recvuIhmhfOhUO",
+      "is_single_main": false,
+      "scrap_qty": 8.0,
+      "purchase_first_leg": 50.7716143,
+      "weight_lbs": 42.99009,
+      "disposal_fee": 2.0,
+      "unit_scrap_cost": 52.7716143,
+      "scrap_cost": 422.1729144,
+      "batches": [
+        {
+          "qty": 8.0,
+          "age": 35.0,
+          "is_dtc": true
+        }
+      ]
+    },
+    {
+      "model": "AMESD02NR-C2-US",
+      "record_id": "recvuIhtdsJ6VH",
+      "is_single_main": false,
+      "scrap_qty": 1.0,
+      "purchase_first_leg": 61.51857345,
+      "weight_lbs": 129.190732,
+      "disposal_fee": 3.0,
+      "unit_scrap_cost": 64.51857344999999,
+      "scrap_cost": 64.51857344999999,
+      "batches": [
+        {
+          "qty": 1.0,
+          "age": 9.0,
+          "is_dtc": true
+        }
+      ]
+    },
+    {
+      "model": "AMESD04DW-C2-US",
+      "record_id": "recvuIhKPEsPI9",
+      "is_single_main": false,
+      "scrap_qty": 11.0,
+      "purchase_first_leg": 48.93619857,
+      "weight_lbs": 53.131342,
+      "disposal_fee": 3.0,
+      "unit_scrap_cost": 51.93619857,
+      "scrap_cost": 571.29818427,
+      "batches": [
+        {
+          "qty": 11.0,
+          "age": 10.0,
+          "is_dtc": true
+        }
+      ]
+    },
+    {
+      "model": "AMESD04NR-C2-US",
+      "record_id": "recvuIhTH3DSiS",
+      "is_single_main": false,
+      "scrap_qty": 11.0,
+      "purchase_first_leg": 48.93619857,
+      "weight_lbs": 53.131342,
+      "disposal_fee": 3.0,
+      "unit_scrap_cost": 51.93619857,
+      "scrap_cost": 571.29818427,
+      "batches": [
+        {
+          "qty": 11.0,
+          "age": 127.0,
+          "is_dtc": true
+        }
+      ]
+    },
+    {
+      "model": "HNESD226N-160A-US",
+      "record_id": "recvuINCtQmEEg",
+      "is_single_main": false,
+      "scrap_qty": 3.0,
+      "purchase_first_leg": 51.6149459,
+      "weight_lbs": 58.753123,
+      "disposal_fee": 3.0,
+      "unit_scrap_cost": 54.6149459,
+      "scrap_cost": 163.8448377,
+      "batches": [
+        {
+          "qty": 3.0,
+          "age": 94.0,
+          "is_dtc": true
+        }
+      ]
+    }
+  ],
+  "total_scrap_cost": 22441.161499209993,
+  "excluded_no_clear": [
+    {
+      "model": "HNESD217B-US",
+      "qty": 609.0
+    }
+  ]
+}

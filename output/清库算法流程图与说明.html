@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="n2nBNNKuqFwSv5K1pCC2g8">
+<head data-page-node-id="fV39OTLaeza6pSfvxhDkr0">
+<meta charset="UTF-8" data-page-node-id="t0uOeF1X7Mvj95HALvjdcp">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="2P70oumuKHY51bghNFxNUB">
+<title>清库方案自动计算 — 算法流程图与说明（2026-09-17）</title>
+<style>
+  :root{
+    --ink:#1f2937; --ink2:#475569; --ink3:#64748b;
+    --blue:#1d4ed8; --green:#047857; --orange:#c2410c; --gray:#334155; --purple:#6d28d9; --g2:#15803d;
+    --line:#e2e8f0; --bg:#f8fafc;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:"PingFang SC","Microsoft YaHei","Segoe UI",system-ui,sans-serif; color:var(--ink); background:var(--bg); line-height:1.65; font-size:14px;}
+  .page{max-width:1080px; margin:0 auto; padding:36px 28px 60px; background:#fff; box-shadow:0 1px 8px rgba(15,23,42,.06);}
+  h1{font-size:24px; letter-spacing:.5px; padding-bottom:14px; border-bottom:3px solid #1f2937; margin-bottom:6px;}
+  .meta{color:var(--ink3); font-size:12.5px; margin-bottom:26px;}
+  h2{font-size:19px; margin:34px 0 14px; padding-left:12px; border-left:5px solid #1f2937;}
+  h3{font-size:15.5px; margin:20px 0 10px;}
+  p{margin:8px 0;}
+  .lead{background:#f1f5f9; border-radius:8px; padding:14px 18px; margin:10px 0 4px; color:var(--ink2); font-size:13.5px;}
+  table{border-collapse:collapse; width:100%; margin:12px 0; font-size:13px;}
+  th,td{border:1px solid var(--line); padding:7px 10px; text-align:left; vertical-align:top;}
+  th{background:#f1f5f9; font-weight:600; white-space:nowrap;}
+  td.num,th.num{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap;}
+  .formula{background:#f8fafc; border:1px solid var(--line); border-left:4px solid #94a3b8; border-radius:6px; padding:10px 16px; margin:10px 0; font-family:"Cascadia Code",Consolas,monospace; font-size:13px; overflow-x:auto; white-space:pre;}
+  .hl{background:#fff7ed; border:1px solid #fed7aa; border-radius:8px; padding:12px 16px; margin:12px 0; font-size:13.5px;}
+  .ok{color:#047857; font-weight:600;} .bad{color:#b91c1c; font-weight:600;} .em{font-weight:600;}
+  .svgwrap{border:1px solid var(--line); border-radius:10px; padding:10px; margin:14px 0; background:#fff;}
+  ul,ol{padding-left:22px; margin:8px 0;}
+  li{margin:4px 0;}
+  code{background:#f1f5f9; border-radius:4px; padding:1px 5px; font-size:12.5px; font-family:Consolas,monospace;}
+  .tag{display:inline-block; font-size:11.5px; padding:1px 8px; border-radius:99px; margin-right:6px; font-weight:600;}
+  .t-blue{background:#dbeafe; color:#1d4ed8;} .t-green{background:#d1fae5; color:#047857;}
+  .t-orange{background:#ffedd5; color:#c2410c;} .t-purple{background:#ede9fe; color:#6d28d9;}
+  .t-gray{background:#e2e8f0; color:#334155;}
+  @media print{
+    body{background:#fff;} .page{box-shadow:none; padding:10mm 12mm; max-width:100%;}
+    h2{page-break-after:avoid;} .svgwrap{page-break-inside:avoid;} table{page-break-inside:avoid;}
+  }
+</style>
+</head>
+<body data-page-node-id="8J2ExnRg6Yxt5LHJgBAPln">
+<div class="page" data-page-node-id="ou07ijmEPgiDgaH2MOfIFB">
+
+<h1 data-page-node-id="Pc0pc1om8YsP3dvZub8Niz">清库方案自动计算 — 算法流程图与说明</h1>
+<div class="meta" data-page-node-id="fgglm93OHCFHFP1D2G7rM4">版本 v2026.09.17 ｜ 分配引擎：边际价值贪心（2026-09-16 拍板）｜ 数据源：飞书多维表格《清库方案成本核算》+《库存表》｜ 本文档数字为 2026-09-16 全量真实运行结果</div>
+
+<div class="lead" data-page-node-id="xRbeW8SKJolkgpbzljsgUG">
+<b data-page-node-id="ZMwiMxFvKpUiWqvCmSTjTv">一句话概括：</b>从 BOM 与行级批次库存出发，用「单套边际价值 = 最优路径净回收 + 避免的整套报废成本」逐套比价，把每一套齐套名额分给价值最高的主 model；分不到套的组件剩余强锁报废；齐套部分在 A 促销 / B 线下出清 / C 激励 / 组合四选项中按真实可销量做净额比选，输出每 model 的具体动作（方案+套数+净额+最优窗口期）并写回飞书。
+</div>
+
+<h2 data-page-node-id="D08CBDIFIoDX0lvFLwQZI8">一、算法流程图</h2>
+<div class="svgwrap" data-page-node-id="CbuyvysorFXmRLWROdHNkK">
+<svg viewBox="0 0 980 1256" xmlns="http://www.w3.org/2000/svg" font-family="PingFang SC, Microsoft YaHei, Segoe UI, sans-serif" data-page-node-id="2jLFHZGqJwhUYnMTRmA4sI">
+  <defs data-page-node-id="A9zuxPx4NHkemdfpmvv5TO">
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse" data-page-node-id="YuDc3NafebN2yZZ1G55CZV">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b" data-page-node-id="MX5GhWUGgNZyAOcH9AY7Hh"/>
+    </marker>
+  </defs>
+
+  <!-- ============ 0 数据准备 ============ -->
+  <rect x="20" y="16" width="940" height="128" rx="10" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.5" data-page-node-id="0glud76XHFO8mMwluCMV98"/>
+  <text x="36" y="42" font-size="15" font-weight="700" fill="#1D4ED8" data-page-node-id="3IDpnNhIhjILAMDhg9WGXi">0&#160;&#160;数据准备与校验</text>
+  <text x="944" y="42" font-size="11" fill="#64748B" text-anchor="end" data-page-node-id="u3hNjfRAP3TQWO3M3qnCcg">fetch_inventory.py · fetch_params.py</text>
+  <g data-page-node-id="AbOXxZm7cdGWerkj4dqUxz">
+    <rect x="41" y="56" width="170" height="66" rx="8" fill="#fff" stroke="#93C5FD" data-page-node-id="wwkEW1mtaw1oJZ0v8yEttc"/>
+    <text x="126" y="82" font-size="12.5" font-weight="700" fill="#1E3A8A" text-anchor="middle" data-page-node-id="VnkJA8b2fgJCt1KxFkq1sn">拉取双表</text>
+    <text x="126" y="101" font-size="11" fill="#475569" text-anchor="middle" data-page-node-id="DWGsvxT3lk6bFVYewioZsk">清库表 + 库存表(行级)</text>
+    <rect x="223" y="56" width="170" height="66" rx="8" fill="#fff" stroke="#93C5FD" data-page-node-id="pkXQyATgpLALlI4L7lgKnt"/>
+    <text x="308" y="82" font-size="12.5" font-weight="700" fill="#1E3A8A" text-anchor="middle" data-page-node-id="niHdaJ1VDWyDtkuCO8YGgB">构建 BOM 树</text>
+    <text x="308" y="101" font-size="11" fill="#475569" text-anchor="middle" data-page-node-id="N6dXbBPUsFSlSqbVvXhM16">主model ↔ 子model(父记录)</text>
+    <rect x="405" y="56" width="170" height="66" rx="8" fill="#fff" stroke="#93C5FD" data-page-node-id="jbtS1YNVmNFpfT1ochyXYx"/>
+    <text x="490" y="82" font-size="12.5" font-weight="700" fill="#1E3A8A" text-anchor="middle" data-page-node-id="mqUNc0qwiJu8liGw4AFMiN">组件批次池</text>
+    <text x="490" y="101" font-size="11" fill="#475569" text-anchor="middle" data-page-node-id="2zHN9pyi1jSmajjzAnGp3g">独立站·海外仓·带库龄</text>
+    <rect x="587" y="56" width="170" height="66" rx="8" fill="#fff" stroke="#93C5FD" data-page-node-id="LY7infW8VZtN3LZDnxnkVJ"/>
+    <text x="672" y="82" font-size="12.5" font-weight="700" fill="#1E3A8A" text-anchor="middle" data-page-node-id="BhOWLC9HY1P32YrI3htX97">四重校验</text>
+    <text x="672" y="101" font-size="11" fill="#475569" text-anchor="middle" data-page-node-id="KIW1ZkEX80gdGXoyGy2TYx">唯一性·层级·数值·对账</text>
+    <rect x="769" y="56" width="170" height="66" rx="8" fill="#fff" stroke="#93C5FD" data-page-node-id="iCWOE7ZoBS1bE92jP1ph7G"/>
+    <text x="854" y="82" font-size="12.5" font-weight="700" fill="#1E3A8A" text-anchor="middle" data-page-node-id="71XEWncHcVmuwmFPN391dT">参数加载</text>
+    <text x="854" y="101" font-size="11" fill="#475569" text-anchor="middle" data-page-node-id="42x0PfXKKvOWzGD4ckALhi">Base 参数表启用行</text>
+    <line x1="211" y1="89" x2="223" y2="89" stroke="#64748b" marker-end="url(#ar)" data-page-node-id="8eQPjq88IKcmL508SHJBHZ"/>
+    <line x1="393" y1="89" x2="405" y2="89" stroke="#64748b" marker-end="url(#ar)" data-page-node-id="nh05UcklY3NLZIz8eB2ar3"/>
+    <line x1="575" y1="89" x2="587" y2="89" stroke="#64748b" marker-end="url(#ar)" data-page-node-id="sy0c0eQipvXhb8F5zUhH4b"/>
+    <line x1="757" y1="89" x2="769" y2="89" stroke="#64748b" marker-end="url(#ar)" data-page-node-id="xxM10O73Cr2hZFTeQpuPoB"/>
+  </g>
+  <line x1="490" y1="144" x2="490" y2="172" stroke="#64748b" stroke-width="1.6" marker-end="url(#ar)" data-page-node-id="AIkZ3qneJDHnJEofuhmeyW"/>
+
+  <!-- ============ 1 阶段一 ============ -->
+  <rect x="20" y="176" width="940" height="118" rx="10" fill="#ECFDF5" stroke="#10B981" stroke-width="1.5" data-page-node-id="Jbgf7D3Y4CmtcDPxnP4Gn9"/>
+  <text x="36" y="202" font-size="15" font-weight="700" fill="#047857" data-page-node-id="IV87PxrgiXyNS8FEgLpSce">1&#160;&#160;阶段一：BOM 解构与经济参数</text>
+  <text x="944" y="202" font-size="11" fill="#64748B" text-anchor="end" data-page-node-id="ZE51X4a45Mvl8YnHYALwiS">allocation.py 前置</text>
+  <g data-page-node-id="Ju5LT79Yj2If6uZzaU0nDT">
+    <rect x="99" y="216" width="250" height="62" rx="8" fill="#fff" stroke="#6EE7B7" data-page-node-id="QUjCWqcE2c09moJGYXSeKk"/>
+    <text x="224" y="240" font-size="12.5" font-weight="700" fill="#065F46" text-anchor="middle" data-page-node-id="1ci8EenaUMDumrQpDKFgYX">共享组件识别</text>
+    <text x="224" y="258" font-size="11" fill="#475569" text-anchor="middle" data-page-node-id="GaaBMoKuh2yrhftl7eAuWN">被 ≥2 个主model 使用</text>
+    <rect x="365" y="216" width="250" height="62" rx="8" fill="#fff" stroke="#6EE7B7" data-page-node-id="UhzTMrfiqZaZ6KhGEXVj9b"/>
+    <text x="490" y="240" font-size="12.5" font-weight="700" fill="#065F46" text-anchor="middle" data-page-node-id="ZpHLN670PZhh3C2ut0jNqQ">营收展示排名</text>
+    <text x="490" y="258" font-size="11" fill="#475569" text-anchor="middle" data-page-node-id="H16FthLy117kBKL20ijdEV">S30×售价 · 仅展示不决定分配</text>
+    <rect x="631" y="216" width="250" height="62" rx="8" fill="#fff" stroke="#6EE7B7" data-page-node-id="r3y71ai5cCu3BvuZfoW0fJ"/>
+    <text x="756" y="240" font-size="12.5" font-weight="700" fill="#065F46" text-anchor="middle" data-page-node-id="0kYY1HDepNI4H1doYPZswT">预计算经济参数</text>
+    <text x="756" y="258" font-size="11" fill="#475569" text-anchor="middle" data-page-node-id="tc9ZvHs2FYJ8Xi58C8GvR8">u_A · u_B · Q_A</text>
+  </g>
+  <line x1="490" y1="294" x2="490" y2="322" stroke="#64748b" stroke-width="1.6" marker-end="url(#ar)" data-page-node-id="RWiHQCANioh80GDVRFChXF"/>
+
+  <!-- ============ 2 阶段二（核心）============ -->
+  <rect x="20" y="326" width="940" height="352" rx="10" fill="#FFF7ED" stroke="#F97316" stroke-width="2.5" data-page-node-id="E8VYwFOdkG4MW8iJPm9h7Q"/>
+  <text x="36" y="352" font-size="15" font-weight="700" fill="#C2410C" data-page-node-id="AZKiGxOLTHcHAC6K22Nx1S">2&#160;&#160;阶段二：共享组件边际价值贪心分配（核心引擎）</text>
+  <text x="944" y="352" font-size="11" fill="#64748B" text-anchor="end" data-page-node-id="rOhvmzLcdfTHL13ZvjqKAv">allocation.py · 取代旧「营收排序瀑布」</text>
+
+  <rect x="40" y="368" width="240" height="290" rx="8" fill="#fff" stroke="#FDBA74" data-page-node-id="D5I5qdRMN7bziY9L25gfLL"/>
+  <text x="160" y="392" font-size="13" font-weight="700" fill="#9A3412" text-anchor="middle" data-page-node-id="lMgi2IiyAeFkkm1uaSesGW">单一物理库存池</text>
+  <g font-size="11.5" fill="#334155" text-anchor="middle" data-page-node-id="zzDyyOW0B88c0dajkfVsgV">
+    <text x="160" y="418" data-page-node-id="1Bwqhl6OLHSkj9RDfKuxtm">组件维度 = 子model（同名合并）</text>
+    <text x="160" y="438" data-page-node-id="6h861Mv0g3UnHvIgdR1tmK">批次 = 库存表行（数量 + 库龄）</text>
+    <text x="160" y="458" data-page-node-id="UBJaREmirNWXYk4bcu0Z1V">入池条件：独立站渠道库存 &gt; 0</text>
+    <text x="160" y="478" data-page-node-id="XhyC9zLTPaXHPizkDDJys9">FIFO：最老批次优先扣减</text>
+    <text x="160" y="502" data-page-node-id="bHxBk2FeTmVdIZZQV8l426">borrow 模式（前端插件）：</text>
+    <text x="160" y="520" data-page-node-id="UCJIbtPwdLyV84CgP4LsXG">独立站批次优先，不足借</text>
+    <text x="160" y="538" data-page-node-id="5x8Jw5ve0TFQY6dHdde2UU">非独立站海外仓批次；</text>
+    <text x="160" y="556" data-page-node-id="oDQwBEBXX6DkqfOTQGoKea">同一物理池操作，</text>
+    <text x="160" y="574" font-weight="700" fill="#C2410C" data-page-node-id="3ljYsh2DP40eVmpJW6SyoH">杜绝双池超卖（问题一修复）</text>
+  </g>
+
+  <rect x="310" y="368" width="360" height="290" rx="8" fill="#fff" stroke="#FB923C" stroke-dasharray="6 4" data-page-node-id="VwXDP5RdTjTS6saILgqgoH"/>
+  <text x="490" y="392" font-size="13" font-weight="700" fill="#C2410C" text-anchor="middle" data-page-node-id="s60ve8YJ4yJiArkmnHIxDM">逐套贪心循环（每一套一分）</text>
+  <g font-size="11.5" fill="#334155" text-anchor="middle" data-page-node-id="ehggw5kSLEc2L0IukU9Anh">
+    <text x="478" y="418" data-page-node-id="K5aIB2raSIpy4X1AKOdax6">对每个可行主model 算边际价值 v：</text>
+    <text x="478" y="440" font-weight="700" fill="#C2410C" data-page-node-id="N9uTsGT4aOy82WRtug2nSB">v = 路径净回收 + Σ组件单件报废成本</text>
+    <text x="478" y="462" data-page-node-id="VKiPNP0kzqDo4YFR7QeTbS">已分 k &lt; Q_A 且 u_A &gt; 0 → 取 u_A</text>
+    <text x="478" y="482" data-page-node-id="BxHIMW1t0Ok3EDgUcbaIJQ">否则 → 取 u_B（1.5折兜底价）</text>
+    <text x="478" y="502" data-page-node-id="wBb5eRtwhRCeNbSKCRBG0F">「清库标记=不清库」组件 → 计 0</text>
+    <text x="478" y="526" font-weight="700" data-page-node-id="GKPJIaTnHAqAcsDEWJlS8g">v 最高者得这一套 → FIFO 扣减 1 套</text>
+    <text x="478" y="548" data-page-node-id="TngvkkTAZoM4APJskFdFQD">v ≤ 0 → 不凑套，组件留池走报废</text>
+    <text x="478" y="570" data-page-node-id="MjqTDCXpwnQAsVhyM1KEnD">同分决胜：营收高 → model 名序</text>
+    <text x="478" y="592" data-page-node-id="OPGNfZEVnr2LBEele8Hzsy">循环至组件池耗尽 / 全部 v ≤ 0</text>
+  </g>
+  <path d="M 648 600 C 682 545, 682 425, 648 372" fill="none" stroke="#FB923C" stroke-width="1.6" stroke-dasharray="4 3" marker-end="url(#ar)" data-page-node-id="wt06xHF1ZnIwxgIOku1mPb"/>
+
+  <rect x="700" y="368" width="240" height="290" rx="8" fill="#fff" stroke="#FDBA74" data-page-node-id="sjjb3AerambeHlQiEQQEeo"/>
+  <text x="820" y="392" font-size="13" font-weight="700" fill="#9A3412" text-anchor="middle" data-page-node-id="kH3ocbskFJri3sqCvdWStA">输出</text>
+  <g font-size="11.5" fill="#334155" text-anchor="middle" data-page-node-id="a1EhhH2Xx0gSDNFZ6rQ8Qf">
+    <text x="820" y="418" data-page-node-id="SEYQVeUPwm3HagI3eeJnCr">各主model 实际齐套数 K</text>
+    <text x="820" y="440" data-page-node-id="dN2EftVFDVdot75p8zBUhG">批次消耗明细（供计提）</text>
+    <text x="820" y="470" font-weight="700" fill="#C2410C" data-page-node-id="mKVuWQ0LrFt3GIibF4aRd5">稀缺组件取舍明细</text>
+    <text x="820" y="488" data-page-node-id="Uy84JUPGdVKJDaN44QPBIj">（赢家/套数 + 让位者）</text>
+    <text x="820" y="520" data-page-node-id="Z3CDDBuvcdAuM0XHOih7mO">剩余组件</text>
+    <text x="820" y="540" data-page-node-id="HrjC5fQNgocXGE2LqqxOcS">→ 长版清单（进阶段三）</text>
+  </g>
+  <line x1="280" y1="512" x2="310" y2="512" stroke="#64748b" stroke-width="1.6" marker-end="url(#ar)" data-page-node-id="y6fSqn0QNqJEmtKKKejTFH"/>
+  <line x1="670" y1="512" x2="700" y2="512" stroke="#64748b" stroke-width="1.6" marker-end="url(#ar)" data-page-node-id="fskBHHPoQ3djbhO4ZcCXQD"/>
+  <line x1="490" y1="678" x2="490" y2="706" stroke="#64748b" stroke-width="1.6" marker-end="url(#ar)" data-page-node-id="MmLyYhWCANjFVsAYZ5Ujck"/>
+
+  <!-- ============ 3 阶段三 ============ -->
+  <rect x="20" y="710" width="940" height="148" rx="10" fill="#F8FAFC" stroke="#64748B" stroke-width="1.5" data-page-node-id="TR3JD4JLrnwiWAnTLaEvQ6"/>
+  <text x="36" y="736" font-size="15" font-weight="700" fill="#334155" data-page-node-id="WpowciCVmE2cggsraf0hZi">3&#160;&#160;阶段三：长版强锁报废</text>
+  <text x="944" y="736" font-size="11" fill="#64748B" text-anchor="end" data-page-node-id="EjCcQvrRFECKnBFJLkD3V5">scrap.py</text>
+  <g font-size="12" fill="#1F2937" data-page-node-id="mB40uVkQOJ7xE2GF2U2oqX">
+    <text x="36" y="764" data-page-node-id="n6g5fnMZD9ixE9c7JnrbPR">· 分配后剩余数量 &gt; 0 的组件 → 强制「组件报废」，<tspan font-weight="700" data-page-node-id="MuXQcF4SH3eSe1ZUrmjAhF">不得</tspan>进入降价或线下清库路径</text>
+    <text x="36" y="786" data-page-node-id="KriL62zJ7o7dUfDLXkRfp6">· 「清库标记 = 不清库」的组件：仍参与齐套分配，但长版剩余不进报废核算（问题三）</text>
+    <text x="36" y="808" data-page-node-id="JSJwtKmOvoaAy8KPxUQYwP">· 单件报废成本 = (采购价+头程) + 报废处理费（&lt;50 lbs：$2.00/件；≥50 lbs：$3.00/件）</text>
+    <text x="36" y="830" data-page-node-id="bLmy5KA4xriygsOYedY0pR">· 报废数量/成本 <tspan font-weight="700" data-page-node-id="uFk2Ctyrkp8ma2TUCErNTi">单行锚定</tspan>于子model首行或单一主记录行，杜绝列求和虚高（问题二修复）</text>
+    <text x="36" y="850" fill="#475569" data-page-node-id="6UX1BG64am1vZkVD5RxmfY">· 报废总成本 = Σ ( 剩余件数 × 单件报废成本 )</text>
+  </g>
+  <line x1="490" y1="858" x2="490" y2="878" stroke="#64748b" stroke-width="1.6" marker-end="url(#ar)" data-page-node-id="j82bBani60ObujBWsAHUgE"/>
+
+  <!-- ============ 4 阶段四 ============ -->
+  <rect x="20" y="882" width="940" height="216" rx="10" fill="#F5F3FF" stroke="#8B5CF6" stroke-width="1.5" data-page-node-id="eq1D9HdsueeEkRJtqMi1Cy"/>
+  <text x="36" y="908" font-size="15" font-weight="700" fill="#6D28D9" data-page-node-id="tsZCVGqMAAEVyxHsnUx3sH">4&#160;&#160;阶段四：混合清库分配与财务核算</text>
+  <text x="944" y="908" font-size="11" fill="#64748B" text-anchor="end" data-page-node-id="jq6qPlCGXDgkgIlw1y4Dz9">scenarios.py</text>
+  <g data-page-node-id="5FrQ9GApdD96RJavlo513Z">
+    <rect x="36" y="922" width="205" height="44" rx="8" fill="#fff" stroke="#C4B5FD" data-page-node-id="6Caes2uHKXff8zKSry7T9p"/>
+    <text x="138" y="948" font-size="12" font-weight="700" fill="#4C1D95" text-anchor="middle" data-page-node-id="8peAj1ifVYNHwWW1l1bTM4">① A促销 + 剩余走B</text>
+    <rect x="251" y="922" width="205" height="44" rx="8" fill="#fff" stroke="#C4B5FD" data-page-node-id="SB1HcoHbyYmREARnoosxuQ"/>
+    <text x="353" y="948" font-size="12" font-weight="700" fill="#4C1D95" text-anchor="middle" data-page-node-id="rRqmIEHopBz9ggqnsn5MdW">② A促销 + 剩余走C+B</text>
+    <rect x="36" y="974" width="205" height="44" rx="8" fill="#fff" stroke="#C4B5FD" data-page-node-id="m0awb5yF5NCMLmO88Q5cHw"/>
+    <text x="138" y="1000" font-size="12" font-weight="700" fill="#4C1D95" text-anchor="middle" data-page-node-id="atauMluQvyug0b0bBtSe3w">③ 全量B线下出清</text>
+    <rect x="251" y="974" width="205" height="44" rx="8" fill="#fff" stroke="#C4B5FD" data-page-node-id="xJapQXSIngnMucPf0nOm3m"/>
+    <text x="353" y="1000" font-size="12" font-weight="700" fill="#4C1D95" text-anchor="middle" data-page-node-id="fYe2wiN1Caqpfif6fBFLCq">④ 全量C激励 + B兜底</text>
+    <text x="138" y="1052" font-size="11.5" fill="#6D28D9" text-anchor="middle" font-weight="700" data-page-node-id="7HgmflO84Nukhp9J4jbOvi">净额最高者胜 → 输出最佳方案（具体方案 + 套数）与净额</text>
+    <text x="138" y="1072" font-size="11" fill="#64748B" text-anchor="middle" data-page-node-id="gQ2RqX84IZzHc0GhCibX3O">如 “A促销(2套)+B出清(49套)”</text>
+  </g>
+  <g font-size="11.5" fill="#334155" data-page-node-id="iH0XWLpdy3HwfZQ8gAfwLC">
+    <text x="500" y="924" data-page-node-id="zfBMuQ4xG5zNG6BhIqaNBG">· 容量约束 <tspan font-weight="700" data-page-node-id="epLbXzP6lCJNUTREHrFY1J">Q = ⌊S30 × (W/30) × M⌋</tspan>，M = clamp(1 + λ·折扣深度, 1.0, 3.0)</text>
+    <text x="500" y="946" data-page-node-id="slILJwk46un3HM5plxI2PA">· A段按 8 折价受 Q_A 限量；C段受 Q_C 限量；B段兜底（当前假设线下无限收货）</text>
+    <text x="500" y="968" data-page-node-id="E2JdurnknCHBKj2tbHH0Fy">· u_A = 原价×0.8 − 固定成本合计 − 降价售价×30%推广费</text>
+    <text x="500" y="990" data-page-node-id="vGYvWmjpVmxCIPOFLBzZMI">· u_B = 原价×1.5折 − (采购价+头程)</text>
+    <text x="500" y="1012" data-page-node-id="LuGuCPe3NGEaG1HWSCFM36">· C奖金按营收分档：≤$20万 1% ｜ $20–50万 1.5% ｜ &gt;$50万 2%（本渠道收入记 0）</text>
+    <text x="500" y="1034" data-page-node-id="i12gXaS3UcpTsqN6OzYwk3">· ΔK 未清库 → 按库龄计提：121–180天 30% · 181–270天 80% · &gt;270天 150%</text>
+    <text x="500" y="1056" data-page-node-id="x1btlRynY38Qke93dJGDZ6">· <tspan font-weight="700" fill="#6D28D9" data-page-node-id="ZNTNL2iUdehYNnRs8eTlpQ">最优窗口 W*：逐日扫描 W∈[1,730]</tspan>，净额最大取最小W；全局 W* = 各model 众数</text>
+    <text x="500" y="1078" fill="#64748B" data-page-node-id="0AYSmnO8vbNVWpFqH66EMk">· 组合模式下剩余由 B 段兜底 → ΔK=0；库龄计提保留于 A 单方案参考口径</text>
+  </g>
+  <line x1="490" y1="1098" x2="490" y2="1120" stroke="#64748b" stroke-width="1.6" marker-end="url(#ar)" data-page-node-id="0mKyg0mezyD1jEnbUDreju"/>
+
+  <!-- ============ 5 写回交付 ============ -->
+  <rect x="20" y="1124" width="940" height="112" rx="10" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.5" data-page-node-id="vpMSHkjWKcsPlL8SngCxK3"/>
+  <text x="36" y="1150" font-size="15" font-weight="700" fill="#15803D" data-page-node-id="wJIUC9S0oGGfvCergLzCOn">5&#160;&#160;写回与交付</text>
+  <text x="944" y="1150" font-size="11" fill="#64748B" text-anchor="end" data-page-node-id="PjODvvtIPGGmYepFplYObS">writeback.py · report.py · run_log.py · 线上插件</text>
+  <g data-page-node-id="ugO9bE538QwKTvg1jh42l1">
+    <rect x="42" y="1162" width="215" height="56" rx="8" fill="#fff" stroke="#86EFAC" data-page-node-id="UOUHnolhLoteCIOzfcfX0u"/>
+    <text x="149" y="1184" font-size="12" font-weight="700" fill="#14532D" text-anchor="middle" data-page-node-id="rZtDp6qlQ8HSEoUkWINkT9">Base 写回（5 字段）</text>
+    <text x="149" y="1202" font-size="10.5" fill="#475569" text-anchor="middle" data-page-node-id="KkYVyCPiHF06rAeGSRLKGe">齐套·方案·回收·报废·窗口</text>
+    <rect x="269" y="1162" width="215" height="56" rx="8" fill="#fff" stroke="#86EFAC" data-page-node-id="LnwTJh7Xs8R26JgSqAmubT"/>
+    <text x="376" y="1184" font-size="12" font-weight="700" fill="#14532D" text-anchor="middle" data-page-node-id="fZ9pBuxNAwdiUJamHKXmHT">运行日志表</text>
+    <text x="376" y="1202" font-size="10.5" fill="#475569" text-anchor="middle" data-page-node-id="Gg3r0allGAVHyxuscG7lQU">每轮汇总 + 全局 W*</text>
+    <rect x="496" y="1162" width="215" height="56" rx="8" fill="#fff" stroke="#86EFAC" data-page-node-id="IC7Y8B5IrrEYHGRmUnMCYx"/>
+    <text x="603" y="1184" font-size="12" font-weight="700" fill="#14532D" text-anchor="middle" data-page-node-id="KzN6yOMnq1TwljtI5ZkMvf">HTML 财务报告</text>
+    <text x="603" y="1202" font-size="10.5" fill="#475569" text-anchor="middle" data-page-node-id="qjnFiqiPfQ7ufeRvYjcn5Y">汇总 + 明细 + 方案对比</text>
+    <rect x="723" y="1162" width="215" height="56" rx="8" fill="#fff" stroke="#86EFAC" data-page-node-id="dPBcOJaUVWVFca0gMFT10g"/>
+    <text x="830" y="1184" font-size="12" font-weight="700" fill="#14532D" text-anchor="middle" data-page-node-id="4SDaHmXTSW54GS3bUYCNxF">线上插件（飞书侧边栏）</text>
+    <text x="830" y="1202" font-size="10.5" fill="#475569" text-anchor="middle" data-page-node-id="VcJ4345AdYIrR91xlG9Ukh">bundle v=20260916e 已部署</text>
+  </g>
+</svg>
+</div>
+
+<h2 data-page-node-id="HyS38eo3ZURp5RCOiyk6rp">二、系统输入与数据口径</h2>
+<table data-page-node-id="pIfECfnT3eoa5tUwxVfD9k">
+<tr data-page-node-id="rRoaJecwFrTtoueH19QDns"><th style="width:150px" data-page-node-id="rsFOHSQGhcDK73JtEdmQMk">数据源</th><th data-page-node-id="3hiSdk2rdiChY0k20RlgGa">说明</th></tr>
+<tr data-page-node-id="cwjs8Rgzapcyllthzc9U6F"><td data-page-node-id="PQgodC7M8PeH8EdXrdEgLl">《清库方案成本核算》主表</td><td data-page-node-id="2DwfMW7g2XeVUEKBl6WFD0">主model（主记录）/ 子model（子记录）层级、售价、采购价+头程、固定成本合计、过去30天销量、部件重量、清库标记等</td></tr>
+<tr data-page-node-id="fnpBl4bXnNVPM0WLMngWOA"><td data-page-node-id="uYX8rvPla13g5e2tO8UyIr">《库存表》</td><td data-page-node-id="JL2ByrmYcsBIwrz56EdOQG">行级批次数据：item / 所属团队 / 仓库类型 / 可用量 / 库龄。组件池直接取行级批次（数量与库龄一一对应），不依赖聚合列</td></tr>
+<tr data-page-node-id="GOegH6ck5adOyE8zFADlwn"><td data-page-node-id="xdAIdD9FqoSlviVzv3VXYZ">《清库参数配置》表</td><td data-page-node-id="XJwev2JJBbvBLOACUDDF3g">仅允许一行「启用」，所有计算参数从该行读取；读取失败回退代码默认值</td></tr>
+</table>
+<p data-page-node-id="Efcya5FQF2NEjhCn8tBpGL">数据校验四重：① 主model 唯一性（同名多行报异常）② 父记录层级合法性 ③ 活跃记录（独立站渠道库存&gt;0）数值完整性 ④ 清库表聚合值 vs 库存表行级聚合对账。</p>
+
+<h2 data-page-node-id="jQjK7ulJbNk1DkfAITCu3L">三、阶段二详解：边际价值贪心（核心）</h2>
+<p data-page-node-id="68aFzt6GvuTPC7sCG8GgkR">2026-09-16 拍板，取代旧「按30天营收排序瀑布流」。根因：营收高 ≠ 每件稀缺组件的净回收高，旧规则把钱分错了。</p>
+<div class="formula" data-page-node-id="C9mk9TnO8MPA8Is5mblL76">单套边际价值  v(model) = 路径净回收 + Σ(n ∈ BOM范围) 单件报废成本(n)
+
+路径净回收：
+    已分配套数 k &lt; Q_A 且 u_A &gt; 0   →   u_A   （A段容量内，8折真实可卖）
+    否则                             →   u_B   （B段1.5折兜底价）
+
+单件报废成本(n) = (采购价+头程) + 报废处理费(&lt;50lb $2 / ≥50lb $3)
+                  「清库标记=不清库」组件计 0；数据缺失计 0（不阻塞分配）
+单一主记录（无子model）：范围 = 自身，即单件 model 同样参与比价</div>
+<ul data-page-node-id="voIrCNQL4gnKJBWswTB6hP">
+<li data-page-node-id="sl0N1QDU9fmy3LFzH8KdpM"><b data-page-node-id="ANJUyLjtbRSxIIbz6EAHG2">v ≤ 0 不凑套</b>：把组件留在池中走报废更优，不制造负毛利齐套（砍掉了旧算法 94 套负毛利兜底）</li>
+<li data-page-node-id="dZ7qmjt4mvDAY0JRnW5b6A"><b data-page-node-id="WFPmWQ4DxYQ6g4lIFQmPEU">销量感知</b>：零销量 model（S30=0 → Q_A=0）第一套就按 u_B 估值，不会被高估能卖高价</li>
+<li data-page-node-id="9j8mqMeDKAVWSudwiwJ9hT"><b data-page-node-id="9nxIVkuQjqdfKPa9gubOPa">同分决胜</b>：营收高者优先，再按 model 名排序，结果确定可复现</li>
+<li data-page-node-id="ZO2VkOujYOiU1LZFDWZn2b"><b data-page-node-id="SM83HfbJsgBiye9sFFFWK3">杜绝超卖</b>：所有扣减在同一物理池内操作（旧版双池影子拷贝曾导致同一批库存被扣两次）</li>
+<li data-page-node-id="yVz0OzzDjW4MIPmyho40TA">循环设有 200 万次安全上限，防止死循环</li>
+</ul>
+
+<h3 data-page-node-id="BzV5WBm3RJJeLq5HOPAAlt">旧规则错在哪（真实数据实证）</h3>
+<table data-page-node-id="BwUmSf2bbgdl538UotdP1H">
+<tr data-page-node-id="YwGoXOtxX4CIGBJfDm4ROo"><th data-page-node-id="T0kFfGOfTe6gN2CKvkcYaU">稀缺组件</th><th data-page-node-id="pf5MoyvHHGFtKHB7UcAbwN">旧算法赢家（单套边际值）</th><th data-page-node-id="tDF7wV9BSVovuAC3QxprRf">被饿死者（单套边际值）</th><th data-page-node-id="eSlTmTDnKUDFG1yKD1B5gy">结论</th></tr>
+<tr data-page-node-id="Vzl7y73Q8GoRYhSdd6BpJo"><td data-page-node-id="IXIIGwZDfwxVi1cImeNncS">AMBFC04NR-C1-US（51件）</td><td data-page-node-id="EAEBfwfE1wsBIKjYhmDJPG">AMBFC04NR-C1-US（$85.02）</td><td data-page-node-id="XiMPmil31Q8VAweSqzHUtH">AMBFC04NR-V-US（$183.70）</td><td class="bad" data-page-node-id="h2YHKYO7Te9BDkQf1P13Nf">给错，差 $98.68/套</td></tr>
+<tr data-page-node-id="86Ysib0ywjr1DTRC9rIzLB"><td data-page-node-id="MAfau4fcgUn1pFavK1AvDj">AMBFC04NR-C2-US（125件）</td><td data-page-node-id="aaPkFy951RJvXPWdx5ahmA">AMBFC04NR-C2-US（$95.87）</td><td data-page-node-id="oojAsrFYO5pbOnvMy2baT1">AMBFC04NR-V-US（$183.70）</td><td class="bad" data-page-node-id="a3Y2uSERDVPJNt7la3A6XZ">给错，差 $87.83/套</td></tr>
+<tr data-page-node-id="TgAFrmIqJmhQZvx3uAc2p1"><td data-page-node-id="jFm2bQ0DoEAlOUH4li53N9">HNESD217W-US（1件）</td><td data-page-node-id="U02hVWFGPxyLXFoeTFmSPn">HNESD213LW（$130.65）</td><td data-page-node-id="EAmE1wlPf3Om1aDBgJn3hP">HNESD216LW（$166.78）</td><td class="bad" data-page-node-id="8JgFg822M6HQTEdVeNsUZY">给错，差 $36.13/套</td></tr>
+</table>
+<p data-page-node-id="WkWPIbjBCdpUTShAQNVo5b">C1/C2 是无 BOM 单件 model，u_B 为负（1.5折出清仍亏），却因营收排名吃光稀缺组件；V 型（单套 $183.70）被饿死。切换贪心后同口径净额 <b data-page-node-id="Tj3iRLCUWri4cbmXW95tHF">+$4,802（+11.5%）</b>。</p>
+
+<h2 data-page-node-id="Ll80ZbvjQiIavPjudLhFnm">四、阶段四详解：四选项净额比选 + 最优窗口</h2>
+<h3 data-page-node-id="FBnMCHsC6ZZGLEQk9ZKDZg">4 个候选选项（对每个有齐套 K 的主 model）</h3>
+<table data-page-node-id="4iliKGmb6gd2XhfJr6EMHi">
+<tr data-page-node-id="tQCVAPnxVEz0OGrHjM308Y"><th data-page-node-id="BP4ElgT1AQ7LiAd1tCKgKS">选项</th><th data-page-node-id="N2brjmENP2rTaWZ3lDpkDM">构成</th><th data-page-node-id="8eGCbpoPFuUvCwwcQJwqIZ">净额</th></tr>
+<tr data-page-node-id="wW0GgniJADfXlNWJbXZy8B"><td data-page-node-id="TMNxDn7zicNf0EH7KfgxMY">① A促销 + 剩余B</td><td data-page-node-id="Z4d1tqzp6u9qxrxebS65kr">k_A = min(K, Q_A)（u_A&gt;0 才启用A段）；其余走 B</td><td data-page-node-id="6aKfEbo3zr4gryl43VPNqj">k_A·u_A + (K−k_A)·u_B</td></tr>
+<tr data-page-node-id="nsrYKTpoKklUBwPRMSnVH4"><td data-page-node-id="aMubYD78EcOeBRhCDhHO4V">② A促销 + 剩余C+B</td><td data-page-node-id="XAC4Q8b5TibZ1FwTIHDZHY">A 段同上；剩余中 k_C = min(剩余, Q_C) 走 C，再剩余走 B</td><td data-page-node-id="hCUbQNnSo97vreMm9RBq5i">k_A·u_A − 奖金(k_C) + (K−k_A−k_C)·u_B</td></tr>
+<tr data-page-node-id="UjNmCRjHLiHAYEKVih9RjI"><td data-page-node-id="sS7M6SV5365td53PeRa8iS">③ 全量B</td><td data-page-node-id="V9yX9ehtSK3QUI6tF7eCjN">K 套全部线下出清</td><td data-page-node-id="1OGP9LsyaDEZ7l5A2xUqkd">K·u_B</td></tr>
+<tr data-page-node-id="pIaNmaTxK6r51G0QI3C96Z"><td data-page-node-id="xbwMUkwFsXb0kSUW62sbnJ">④ 全量C + B兜底</td><td data-page-node-id="qgLH4TpsxzUazEPQdb8mQD">k_C = min(K, Q_C) 走 C，其余走 B</td><td data-page-node-id="l2qkHz6bbYKZIbRaw63v39">−奖金(k_C) + (K−k_C)·u_B</td></tr>
+</table>
+<p data-page-node-id="xdCqKv4U0U2Km4PmagpTBH">净额最高者胜（并列取排序前者）；输出为具体动作描述，如 <code data-page-node-id="vjPG5NwfBULHzrPvnwR24v">A促销(2套)+B出清(49套)</code>，零数量分段自动省略。</p>
+
+<h3 data-page-node-id="6WIBMtUrdFCNtECWLQ6eQG">可销量与最优窗口</h3>
+<div class="formula" data-page-node-id="DjJMQf2YlEAMESD1yCLP2j">Q(售价) = ⌊ S30 × (W / 30) × M ⌋          M = clamp(1 + λ × 折扣深度, 1.0, 3.0)，λ=1.0
+· 8折 → M=1.2；折扣越深放大越大，上限 3.0（保守）
+· 窗口 W 默认取参数表「销量预测窗口」= 60 天
+· 最优窗口 W*：W 从 1 到 730 逐日扫描，取净额最大（并列取最小 W）；
+  净额对窗口不敏感的 model 输出空值；全局最优窗口 = 各 model W* 的众数</div>
+
+<h3 data-page-node-id="YQvetshD5uVDQhHzKkR1Gk">C 激励奖金（分档累进，本渠道收入记 0）</h3>
+<table data-page-node-id="YFVVDOLFcPefFMCCXsDdh9">
+<tr data-page-node-id="u3rHbFIXfcRSXwCr39i5dB"><th data-page-node-id="2KYEnfPyW2eEmmL58l0wY1">营业收入档（USD）</th><th data-page-node-id="z3ySEGJVSDfjic9UxzWtfN">奖金比例</th></tr>
+<tr data-page-node-id="KV68ZZ4G5dqyfVQcgSzIUv"><td data-page-node-id="Q0FR558g6Y3nDXQII07NJ4">≤ 20 万</td><td data-page-node-id="ZnheIpD0KRFHVMUkMiXqhS">1%</td></tr>
+<tr data-page-node-id="O0g3OctgWh0f0TD7tIvMyb"><td data-page-node-id="LCddSQKzdpE7y9KISPsioT">20 – 50 万部分</td><td data-page-node-id="wVLg0qvH3eeAWhJ75LHN1i">1.5%（前 20 万仍按 1%）</td></tr>
+<tr data-page-node-id="zqU4CBLbVhSKfyswxTq74e"><td data-page-node-id="MpE63HDjYxYj6DcvdE7840">&gt; 50 万部分</td><td data-page-node-id="BAjve2rIoJGJoxZI93EbmU">2%（累计累进）</td></tr>
+</table>
+
+<h3 data-page-node-id="uKQz1fl7YxCpjqzKDVRGeS">未清库计提（库龄分档，基数=采购价不含头程）</h3>
+<table data-page-node-id="lDUYsy6iZu0oYmOFcb7vsB">
+<tr data-page-node-id="7AUypsKSxRJN83owgAWNJr"><th data-page-node-id="laYFhM1zGiMzC8ys96LQf1">库龄</th><th data-page-node-id="z7ANc4udih71hOXexmVhIB">计提比例</th></tr>
+<tr data-page-node-id="aLU3BkGk5zf6gqKPgmtEdF"><td data-page-node-id="j5qKYs1hVpUHX7DpezQd0x">≤ 120 天</td><td data-page-node-id="vxPH7XZCglGBs6mKyLngjc">0</td></tr>
+<tr data-page-node-id="tk6U5VO86mDeUag0y1Hie2"><td data-page-node-id="4G8WbquwAuCrNxnS6Cs0tL">121 – 180 天</td><td data-page-node-id="lipxXr70zQRBBv76gbCOW1">30%</td></tr>
+<tr data-page-node-id="hSWQkZdHh0q0lL0ZoF7ixf"><td data-page-node-id="bY7dd0dzHGTORinxCUglwn">181 – 270 天</td><td data-page-node-id="wD7qZSEcnhpkE0wSPmL2dm">80%</td></tr>
+<tr data-page-node-id="VcFbxFEVF8SHd0wKC5W7VY"><td data-page-node-id="SEaAWj8KBpBNYAqEnlErx3">&gt; 270 天</td><td data-page-node-id="vkRD4LllJqH0pv6fO7uRiU">150%</td></tr>
+</table>
+
+<h2 data-page-node-id="cgRpVcZUAqYrwFai0e1Ly2">五、当前启用参数（Base 参数表）</h2>
+<table data-page-node-id="nDEYmD1Vdwpsowjd4E5A20">
+<tr data-page-node-id="8GraZsyt74BWdnHxYsSdgS"><th data-page-node-id="rVkqDmrnzxBMZMBtsd2EVh">参数</th><th class="num" data-page-node-id="NS1upXxp9GN6CK0684wAib">当前值</th><th data-page-node-id="scmvoD1aAy0fsv20bwjQQ5">参数</th><th class="num" data-page-node-id="7yIzAdNBspQRb0rzH0njWa">当前值</th></tr>
+<tr data-page-node-id="HQe1fFFCXvMKf6zoy8fVRT"><td data-page-node-id="Q3VB0AqVALdSPyGdFfmlkI">销量预测窗口 W</td><td class="num" data-page-node-id="ooTzYT8MrHoWz7Loy05RFx">60 天</td><td data-page-node-id="GaJLapaq4Ukyqq5JveR6b0">报废费-轻（&lt;50lbs）</td><td class="num" data-page-node-id="tA9Jq8z4gYVBh6zxukGMyN">$2.00/件</td></tr>
+<tr data-page-node-id="v7QO2mpbiezUvHbNDiFDeL"><td data-page-node-id="tyzmrVRjfbJ5BAULFl8eor">A 降价幅度</td><td class="num" data-page-node-id="7Hayx927lqmtdrDRO7DsXF">20%（8折）</td><td data-page-node-id="oFr0II97knEVuDae4IIvta">报废费-重（≥50lbs）</td><td class="num" data-page-node-id="9Zg4gFIeo76bFlzOt5EVWT">$3.00/件</td></tr>
+<tr data-page-node-id="w1Nr3wW3cDxk2247djv2dA"><td data-page-node-id="uivFOcuGOIHUXV0CTtFtb3">B 线下折扣</td><td class="num" data-page-node-id="oz7ecNprcrGrr770NDYE7A">1.5折</td><td data-page-node-id="sLG1FzqjjZupX7MpLiHMvH">计提库龄分界 1 / 2</td><td class="num" data-page-node-id="7C78KltXwxIW7ZDdRueB1v">120 / 180 天</td></tr>
+<tr data-page-node-id="kvHJG8QHQFF1lJMmDudyig"><td data-page-node-id="sXIU7LlOof7QW7pamogaHw">C 促销售价</td><td class="num" data-page-node-id="QE3R1gMewn9Ej98VEP70rj">8折</td><td data-page-node-id="0wJBfHtYHecAE67aJJvEfs">计提比例 30% / 80% / 150%</td><td class="num" data-page-node-id="vqJb2nASZFH6p1tS36tiPH">121–180 / 181–270 / &gt;270 天</td></tr>
+<tr data-page-node-id="MdYRtruqCXtrPLZ6qlEgFm"><td data-page-node-id="0Yrii02K3M603IigWIWYAU">A 推广费率</td><td class="num" data-page-node-id="0AuJESsZHodXV91gXVOxWQ">30%</td><td data-page-node-id="YLwoDGUqmGqmE5ACBMHZGv">奖金档</td><td class="num" data-page-node-id="I8CWqmKPoVLgrdCKBRU3QC">1% / 1.5% / 2%（20万/50万分界）</td></tr>
+<tr data-page-node-id="tmDdDxQieqCkeNMd0qMBY8"><td data-page-node-id="4Lvjd3H2XneD5JHJ8iqI4C">销量放大 λ / M 范围</td><td class="num" data-page-node-id="x0T6w5CGiCFZ0sOfvUUFrL">1.0 / [1.0, 3.0]</td><td data-page-node-id="SGD3PiaG7u9X5RvfHXIeg1">报废重量分界</td><td class="num" data-page-node-id="2FuwZGaTwqhtxOL2CLjR6U">50 lbs</td></tr>
+</table>
+
+<h2 data-page-node-id="HZCwAgmblarwsGjb1zJ1L7">六、最新一轮真实运行结果（2026-09-16）</h2>
+<table data-page-node-id="3HdZo77AkrCCG71h8njJuj">
+<tr data-page-node-id="NzJ0uN38bBRWPMnmY7HNGQ"><th data-page-node-id="hc1Uw8SIqdmQDpf9BPbBgg">指标</th><th class="num" data-page-node-id="5lwpunpnffDyyJcsWjt1L1">数值</th></tr>
+<tr data-page-node-id="9nQwkWRLEEaInlOCLVP162"><td data-page-node-id="u33AjcHUgJIWDoJFiXEiDJ">主 model 数 / 有齐套</td><td class="num" data-page-node-id="b6L0YQskAplDQ3i7OxYOMk">83 / 24</td></tr>
+<tr data-page-node-id="VSumPa5rQUYkhwNAbkBWN1"><td data-page-node-id="HWqMavOXKCewYDGKohKutO">总齐套 K</td><td class="num" data-page-node-id="krBUHQn4PNaAEjwExxWsek">1,002 套（A 238 ｜ C 115 ｜ B 649 ｜ ΔK 0）</td></tr>
+<tr data-page-node-id="Sc1G3u3PmB55ylD0eroO9c"><td data-page-node-id="yz5LxSFm13DhOhzjuHuRUz">报废组件 / 总报废成本</td><td class="num" data-page-node-id="3AfZiZvN3L5DXERL8X029N">$26,123.25</td></tr>
+<tr data-page-node-id="mDHEdBImpE0AhwoiEvgrDE"><td data-page-node-id="zx16anoej1bQRLmiBTOKNs">本渠道净额合计</td><td class="num" data-page-node-id="gwf7ZSM5zyFFZ5n2EgHkbr"><b data-page-node-id="Y3LN9RYi3ZuCylrc1npQBt">$46,583.71</b></td></tr>
+<tr data-page-node-id="mTAZs2x0KZcH8QMhbMtzng"><td data-page-node-id="yc1G8gstzUBfU8zxlis8s6">全局最优窗口 W*</td><td class="num" data-page-node-id="srDfGur7KMtzry8dOwbBb2">25 天</td></tr>
+<tr data-page-node-id="lREx5CF1B0d3HkWziBhqZl"><td data-page-node-id="Y5N1QV4CKy63EptPjnmLra">发生取舍的稀缺共享组件</td><td class="num" data-page-node-id="m3f9wOkZ8SwDAW6NcUDiB0">6 个</td></tr>
+</table>
+
+<h3 data-page-node-id="SqSsn196MmsjaCjuSCUkZ5">稀缺组件取舍明细（本轮实际发生）</h3>
+<table data-page-node-id="Ul2SEjxLiQFltq5HEkAGe7">
+<tr data-page-node-id="OBtFw6jJ5U7jtaQJck9iw4"><th data-page-node-id="CwcT3IDDeM7QIkxZm55XPB">稀缺组件（库存）</th><th data-page-node-id="cqfnNUCHUsl3umW94x5URx">赢家（套数）</th><th data-page-node-id="qDGbGyHTVEWOj4YRUCDSTx">让位者</th></tr>
+<tr data-page-node-id="Iz8vyLmBXArV97gTPTyj9i"><td data-page-node-id="CkwJEf9o9p1p7uT121EWvY">AMBFC04NR-C1-US（51件）</td><td data-page-node-id="zYEZng2EyDNQB0Ak4rcZhR">AMBFC04NR-V-US（51）</td><td data-page-node-id="Dag8bCJv0eW5ePGe56qeNr">AMESD01NR-V-US、AMBFC04NR-C1-US</td></tr>
+<tr data-page-node-id="0A1ntB1pvay4sEDUyOz8wh"><td data-page-node-id="qKTAOoyzjSfa8JrXnYm6uV">AMBFC04NR-C2-US（125件）</td><td data-page-node-id="JWPVIdNqhTvRmMSaBpjxoQ">AMBFC04NR-V-US（51）、AMBFC04NR-C2-US（74）</td><td data-page-node-id="9PGtERos32W0MoqLrAO0lF">AMESD01NR-V-US</td></tr>
+<tr data-page-node-id="fvHuloBznKcAL4BUtcOwzi"><td data-page-node-id="Tzk6LyYKL9PRn0hWlnHf4m">AMBFC04NW-C2-US（33件）</td><td data-page-node-id="5k1ae54nE1E6GWweFEOnO3">AMBFC04NW-C2-US（33）</td><td data-page-node-id="DHeFHToClPv9ztLV0uUg15">AMESD01NW-V-US</td></tr>
+<tr data-page-node-id="apXZidANhw3GCPdntvn94Q"><td data-page-node-id="Pmm6EESLZQTvBbvhcIy4qV">HNESD217W-US（1件）</td><td data-page-node-id="E4QgZqNti0YtrzQyp75wsP">HNESD216LW-140A-V-US（1）</td><td data-page-node-id="itZ6RTr95Gh35sMCY9WhIj">HNESD213LW-120A-V-US、PDESD267/268/263LW-V、AMESD02LW-V</td></tr>
+<tr data-page-node-id="hWqdWyH7NHtGd1p2U3qHoD"><td data-page-node-id="cc8DmurIiwQNpgbzrDFq0R">AMESD01B-F-US（1件）</td><td data-page-node-id="TCIDasGRUUJxM5dNcF2L8X">AMESD01NW-V5-US（1）</td><td data-page-node-id="2dLsNQDkOoKKQvLWG5qzwi">AMESD01NW-V-US、AMESD01W-V-US</td></tr>
+<tr data-page-node-id="e7pw2hbaDF0yVWNUnQ1qVR"><td data-page-node-id="HJK9iR1ODaDCW8av9p2Urt">AMESD01DW-D-US（1件）</td><td data-page-node-id="Y7DHEJHQLlEySPQ8ZKYlIP">AMESD01DW-V5-US（1）</td><td data-page-node-id="zzqrQEvqjjQ8ElyHSTiwuS">AMESD01DW-V-US</td></tr>
+</table>
+
+<h3 data-page-node-id="P0ixtd5RKGjugQfMmq7eFf">新旧算法同口径对比</h3>
+<table data-page-node-id="o2wmsdCLCEyjJVp4c88qKk">
+<tr data-page-node-id="hborL5JaOUUY69DDaC7Ksg"><th data-page-node-id="i4KhdtBWHlTcni2HUwCFSF">指标</th><th class="num" data-page-node-id="LV4rHwEPldhKiArfhsA2um">营收瀑布（旧）</th><th class="num" data-page-node-id="Q2iDYSMxP5A7pG7LqkHFfw">价值贪心（新）</th><th class="num" data-page-node-id="TMTG0HPuRR4RZmpttjZ9kb">差</th></tr>
+<tr data-page-node-id="Mdr3ovpUMxxAwpAuAYYQ08"><td data-page-node-id="bF3MVaW8NxCY0OAUrQB8xM">总齐套 K</td><td class="num" data-page-node-id="BGARog1CwwWX3XS6oO6Dq5">1,053</td><td class="num" data-page-node-id="3I2S5MhKbZKwJlqfY9KXMj">1,002</td><td class="num" data-page-node-id="pLSLnegTci6dOoAT0bF77e">−51（全部为负毛利套）</td></tr>
+<tr data-page-node-id="z7LFmtBMs20et6XCPE9ZGa"><td data-page-node-id="D5sKucFCnOJXRFIvJUwGHR">A 促销 / C 激励 / B 出清</td><td class="num" data-page-node-id="cdsvhPZyAMvjSFuqUPQZi0">240 / 115 / 694</td><td class="num" data-page-node-id="nRRl1uTAQJNuI2yUHxAh6w">238 / 115 / 649</td><td class="num" data-page-node-id="1apucjCIRD1OiznqgQpQ4o">有销量依据的 A+C 基本持平</td></tr>
+<tr data-page-node-id="3Pt42jSYlUDiufCZqJ5kXL"><td data-page-node-id="CyYVbBvSg2s9ChNuVZzLTD">报废成本</td><td class="num" data-page-node-id="AKcrZzrPzmkVl9ZW4C8lwB">$26,123.25</td><td class="num" data-page-node-id="9lJHlVBUS90ErZdwJanXO9">$26,123.25</td><td class="num" data-page-node-id="2cqB0zm5A2vgsA8vnwMX8j">0</td></tr>
+<tr data-page-node-id="537GPaaDdGqTSyUMbxFOJR"><td data-page-node-id="BFirFZ8W9cy4EDcjj8IWRV"><b data-page-node-id="ifvdmixyPGB8rWXjyieOWg">本渠道净额</b></td><td class="num" data-page-node-id="qp1jEKG82NVRX6LC1TURtl">$41,781.47</td><td class="num" data-page-node-id="e9gXWS50G7Vw3DT74cPWmv"><b data-page-node-id="IGRfZ3WjNgMO16W7VHivVG">$46,583.71</b></td><td class="num bad" data-page-node-id="Jl9gjSD0YgrDvmD4igZpc4">+$4,802.24（+11.5%）</td></tr>
+</table>
+
+<h3 data-page-node-id="5ZaWr7UMqGcyBah12G3vBw">可卖出依据（验收口径）</h3>
+<table data-page-node-id="uMUKCijOskIAhNibdBJeT1">
+<tr data-page-node-id="JqojyZDXpzkbiZ0vd2a3rb"><th data-page-node-id="2v0miw0yWZPjad1VMJVwzw">段</th><th class="num" data-page-node-id="GfEnHC59OG1rHrJq7EKWcW">套数</th><th data-page-node-id="A57VUOj3yI35bInRmoX9nF">依据</th></tr>
+<tr data-page-node-id="j780Unnmgi488p4UKCtApV"><td data-page-node-id="O95IgER0BHyv1LFwfnXsKb">A 段</td><td class="num" data-page-node-id="jDO8BkMZtC47pFPe2GQBI7">238</td><td data-page-node-id="fGHFoWkz0Cmluf6EY4CTPz">逐 model 满足 k_A ≤ Q_A；Q_A 由过去 30 天真实销量推算（60 天窗口 × 折扣放大 M≤3.0）</td></tr>
+<tr data-page-node-id="MyxGzCLsNu6HUmXZgdSSE6"><td data-page-node-id="c7HdqVA656yG22XBDWLiU4">C 段</td><td class="num" data-page-node-id="QPJTRml8rKi9wVDYB0mrIc">115</td><td data-page-node-id="z4QqO8RXAWCEQmPRYG4K9o">同口径 k_C ≤ Q_C</td></tr>
+<tr data-page-node-id="7zCzQY3VOWr15FOzA2Bz8R"><td data-page-node-id="4nKyfCIfr0BKYwL55EwugE">B 段</td><td class="num" data-page-node-id="EXh3i7xBSLGdU01MwE9f2f">649</td><td data-page-node-id="aKBwbuFFE1L5OF0xRfg12A">依赖「线下 1.5 折收货」业务假设；已验证每套 <b data-page-node-id="nXz0SvPKns3LNDF5m5rIe3">出清亏损 &lt; 整套报废损失</b>（违规 0 个），兜底下限是报废</td></tr>
+</table>
+
+<h2 data-page-node-id="NpU2tZYLBBawzwqMXN0Imf">七、三条执行链路（口径已交叉验证一致）</h2>
+<table data-page-node-id="4TUH5IWYj2e9e2rD7ivKyl">
+<tr data-page-node-id="VtCFAOpLsqNH1BCRGobvGR"><th style="width:170px" data-page-node-id="NwBfVZtyJjkK3cIsZ8dmDa">链路</th><th data-page-node-id="btNNpIlPOqLyzB4O69iE4A">入口</th><th data-page-node-id="D3WtCQsJXxCDLH3O98RUFW">说明</th></tr>
+<tr data-page-node-id="9YLKFJ1PvP33Sf0JdWXD8b"><td data-page-node-id="UfWwDOhoe9WbFMYphA7V29">Python 全链路</td><td data-page-node-id="7AzddSGPgDHI1zxo92QsyI"><code data-page-node-id="tAxQ957GRkpBSv0mmLm3yD">src/run_all.py</code></td><td data-page-node-id="07asQeJUkDyTOLQ7SLqABG">fetch → allocate → scrap → scenarios → writeback → 日志 → HTML 报告，一键全流程，结果写回飞书 Base</td></tr>
+<tr data-page-node-id="ITkh1LV5FMdY3oeFWAtorW"><td data-page-node-id="FhwNnbWJOBGsGIrxBVwrJz">多维表格扩展脚本</td><td data-page-node-id="88yUAKGX9JrDJdYrlf4ht6"><code data-page-node-id="6ptH7ekFh4gOoPjzE3e2Ku">src/base_script.js</code></td><td data-page-node-id="k8ni07zmQwntnr6zBKtGV5">表内运行，控制台输出稀缺取舍日志</td></tr>
+<tr data-page-node-id="XgkJHBUldSyv8hMDBE3yqi"><td data-page-node-id="yGqsh01EFicsGXuhPF5OCT">线上插件</td><td data-page-node-id="8nPMs3hiY8ZUanIB8TTzOh">飞书侧边栏</td><td data-page-node-id="iWsqZoBUAVfQrbGgtbsdOv"><code data-page-node-id="p9vB7PSJXqN4tv6p7EoolG">https://5e5ee3e9a9cf445bb745e523d7541bb2.app.workbuddy.host</code>（bundle v=20260916e，云端托管，关机可用；支持「纯独立站 / borrow 借调」两种库存口径，自定义窗口 + 自动最优窗口）</td></tr>
+</table>
+
+<h2 data-page-node-id="IgmD8K9JnZusLR8auCE9e4">八、已知边界与待定参数</h2>
+<ul data-page-node-id="Qj5Kevvb9excM37FeAtgKR">
+<li data-page-node-id="BnUBA4ZsAKmkhgGI30tFTo"><b data-page-node-id="ZHMtLj0ioyQUnGEC0kuhWr">B 段收货上限</b>：当前假设线下渠道无限收货；若有实际上限，可参数化为 Q_B 容量（与 Q_A 同构），超限部分自动改判报废 —— 待业务给数</li>
+<li data-page-node-id="dpSGgx3QuJLCs2lOx9t3DS"><b data-page-node-id="yHOLnQRfiC2U8xKZlOlRvd">贪心为局部最优</b>：逐套比价非全局整数规划最优；当前规模（83 主model / 1,002 套）下与全局最优差距可忽略</li>
+<li data-page-node-id="B2IeI5pWWEGgwCvowa35Xl"><b data-page-node-id="jOjSUi28wBcc9iVfRpTbzl">计提跨周期不去重</b>：同一批库存下一周期按新库龄再次计提，按公司规则照计</li>
+<li data-page-node-id="6dPIOYFWBct9dpwEo3qOf0"><b data-page-node-id="T5CRD23mGuoJx3vjMHmTFq">参数回退</b>：参数表不可用或无启用行时回退代码默认值（与历史拍板值一致），运行日志会标注场景名</li>
+</ul>
+
+<p style="margin-top:30px; color:#94a3b8; font-size:12px; border-top:1px solid #e2e8f0; padding-top:12px;" data-page-node-id="5dZkT6KL9KJlhiMerq6Qre">
+清库方案自动计算 · 算法文档 v2026.09.17 · 分配引擎：边际价值贪心（2026-09-16 拍板）· 规则全文见 rules/agent.md
+</p>
+</div>
+</body>
+</html>

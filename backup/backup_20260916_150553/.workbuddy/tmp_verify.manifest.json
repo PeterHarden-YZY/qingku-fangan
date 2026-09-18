@@ -1,0 +1,85 @@
+{
+  "manifest_version": "v1",
+  "format": "ndjson",
+  "base_token": "HPsJbdMCva1IersNsFQco976n7B",
+  "table_id": "tblvEAMIFUSzjYmW",
+  "rev": 140,
+  "timezone": "Asia/Shanghai",
+  "query_context": {
+    "field_scope": "selected_fields",
+    "record_scope": "filtered_records"
+  },
+  "requested_limit": 200,
+  "records_count": 37,
+  "page_count": 1,
+  "has_more": false,
+  "record_file": "D:\\agents_project\\清库方案自动计算\\.workbuddy\\tmp_verify.ndjson",
+  "record_file_size_bytes": 6111,
+  "manifest_file": "D:\\agents_project\\清库方案自动计算\\.workbuddy\\tmp_verify.manifest.json",
+  "columns": {
+    "model": {
+      "field_id": "fldveV7x2m",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 21
+      },
+      "example": "HNSS44B-US"
+    },
+    "record_id": {
+      "physical_type": "string",
+      "stats": {
+        "max_length": 14
+      },
+      "example": "recvuAqcP3NAg6"
+    },
+    "处理方案": {
+      "field_id": "fld76897Rj",
+      "field_type": "select",
+      "physical_type": "array<string>",
+      "stats": {
+        "empty_count": 9,
+        "max_length": 2,
+        "avg_length": 1.2702702702702702
+      },
+      "example": [
+        "降价售卖"
+      ]
+    },
+    "实际齐套数": {
+      "field_id": "fld6HJllY0",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 0,
+        "min": 1,
+        "max": 939,
+        "avg": 63.54054054054054
+      },
+      "example": 3
+    },
+    "最佳方案": {
+      "field_id": "fldKeLHJAM",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 7
+      },
+      "example": "A"
+    },
+    "预计回收资金": {
+      "field_id": "fldbNMkSHj",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 0,
+        "min": -3234.93,
+        "max": 12715.39,
+        "avg": 782.9043243243244
+      },
+      "example": 0
+    }
+  }
+}

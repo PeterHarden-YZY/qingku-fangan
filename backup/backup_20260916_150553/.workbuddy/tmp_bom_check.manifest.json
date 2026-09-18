@@ -1,0 +1,58 @@
+{
+  "manifest_version": "v1",
+  "format": "ndjson",
+  "base_token": "HPsJbdMCva1IersNsFQco976n7B",
+  "table_id": "tblFK7I0sxjoOG8c",
+  "rev": 765,
+  "timezone": "Asia/Shanghai",
+  "query_context": {
+    "field_scope": "all_fields",
+    "record_scope": "filtered_records"
+  },
+  "requested_limit": 50,
+  "records_count": 1,
+  "page_count": 1,
+  "has_more": false,
+  "record_file": "D:\\agents_project\\清库方案自动计算\\.workbuddy\\tmp_bom_check.ndjson",
+  "record_file_size_bytes": 276,
+  "manifest_file": "D:\\agents_project\\清库方案自动计算\\.workbuddy\\tmp_bom_check.manifest.json",
+  "columns": {
+    "item（数组）": {
+      "field_id": "fldVVao0Jt",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 81
+      },
+      "example": "[\"C415150104101\",\"C415154371101\",\"C415154381101\",\"C418150014101\",\"C418150024101\"]"
+    },
+    "record_id": {
+      "physical_type": "string",
+      "stats": {
+        "max_length": 14
+      },
+      "example": "recvuTvgeIgnNM"
+    },
+    "主model": {
+      "field_id": "fldkDIwCg4",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 14
+      },
+      "example": "AMESD01NW-V-US"
+    },
+    "子model（数组）": {
+      "field_id": "fldIZRRDyt",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 0,
+        "max_length": 70
+      },
+      "example": "[\"AMBFC04NW-C1-US\",\"AMBFC04NW-C2-US\",\"AMESD01B-F-US\",\"AMESD01NW-D-US\"]"
+    }
+  }
+}

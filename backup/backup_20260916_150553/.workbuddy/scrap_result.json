@@ -1,0 +1,83 @@
+{
+  "params": {
+    "scenario": "默认场景(代码默认值)",
+    "scrap_fee_light": 2.0,
+    "scrap_fee_heavy": 3.0,
+    "weight_threshold": 50.0
+  },
+  "items": [
+    {
+      "model": "AMESD02NW-C1-US",
+      "record_id": "recvuAGRas580V",
+      "is_single_main": false,
+      "scrap_qty": 14.0,
+      "purchase_first_leg": 50.7716143,
+      "weight_lbs": 42.99009,
+      "disposal_fee": 2.0,
+      "unit_scrap_cost": 52.7716143,
+      "scrap_cost": 738.8026002,
+      "batches": [
+        {
+          "qty": 9.0,
+          "age": 253.0
+        },
+        {
+          "qty": 5.0,
+          "age": 252.0
+        }
+      ]
+    },
+    {
+      "model": "AMESD02NR-C2-US",
+      "record_id": "recvuIhtdsJ6VH",
+      "is_single_main": false,
+      "scrap_qty": 1.0,
+      "purchase_first_leg": 61.51857345,
+      "weight_lbs": 129.190732,
+      "disposal_fee": 3.0,
+      "unit_scrap_cost": 64.51857344999999,
+      "scrap_cost": 64.51857344999999,
+      "batches": [
+        {
+          "qty": 1.0,
+          "age": 7.0
+        }
+      ]
+    },
+    {
+      "model": "AMESD04DW-C2-US",
+      "record_id": "recvuIhKPEsPI9",
+      "is_single_main": false,
+      "scrap_qty": 11.0,
+      "purchase_first_leg": 48.93619857,
+      "weight_lbs": 53.131342,
+      "disposal_fee": 3.0,
+      "unit_scrap_cost": 51.93619857,
+      "scrap_cost": 571.29818427,
+      "batches": [
+        {
+          "qty": 11.0,
+          "age": 8.0
+        }
+      ]
+    },
+    {
+      "model": "AMESD04NR-C2-US",
+      "record_id": "recvuIhTH3DSiS",
+      "is_single_main": false,
+      "scrap_qty": 11.0,
+      "purchase_first_leg": 48.93619857,
+      "weight_lbs": 53.131342,
+      "disposal_fee": 3.0,
+      "unit_scrap_cost": 51.93619857,
+      "scrap_cost": 571.29818427,
+      "batches": [
+        {
+          "qty": 11.0,
+          "age": 125.0
+        }
+      ]
+    }
+  ],
+  "total_scrap_cost": 1945.91754219
+}

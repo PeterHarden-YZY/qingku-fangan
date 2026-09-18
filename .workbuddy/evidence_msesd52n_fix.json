@@ -1,0 +1,50 @@
+{
+  "model": "MSESD52N-V-US",
+  "date": "2026-09-17",
+  "before": {
+    "K": 0,
+    "pool_MSESD41W": {
+      "dtc": 0,
+      "borrowable": 0,
+      "reason": "入池过滤 所属团队==独立站, 345件非独立站库存全部被排除"
+    },
+    "pool_MSESD52N": {
+      "dtc": 50,
+      "borrowable": 0
+    },
+    "root_cause": "BOM另一子件 MSESD41W-US 库存全部在非独立站(Amazon-VC/SC/Wayfair), 严格独立站入池导致其池内=0, BOM无法凑套"
+  },
+  "after": {
+    "K": 50,
+    "pool_MSESD41W": {
+      "dtc": 0,
+      "borrowable": 345
+    },
+    "pool_MSESD52N": {
+      "dtc": 50,
+      "borrowable": 256
+    },
+    "consumed_41W": "独立站0 + 借调50 (FIFO: 283d/1件, 120d/13件, 104d/6件, 81d/1件, 79d/20件, 70d/9件... 按库龄降序)",
+    "consumed_52N": "独立站50 FIFO (383d/8, 357d/16, 308d/26)",
+    "scenario": {
+      "k_c": 24,
+      "k_b": 26,
+      "k_a": 0,
+      "best_plan": "C激励(24套)+B出清(26套)",
+      "best_net": -2091.13
+    }
+  },
+  "total_k": {
+    "before": 1002,
+    "after": 1041
+  },
+  "fix_files": [
+    "src/fetch_inventory.py",
+    "src/allocation.py"
+  ],
+  "fix_summary": [
+    "fetch_inventory.py: 组件池入池口径从「仅独立站海外仓」改为「海外仓全量批次 + is_dtc 标记」(与前端插件 src_app.js 一致), 在途批次补 is_dtc=True",
+    "fetch_inventory.py: 幽灵组件校验只对池内独立站部分比对主表独立站库存(非独立站批次是合法借调源)",
+    "allocation.py: 实装 borrow 模式——可行性门槛「整套至少一个组件有独立站批次」, 扣减独立站优先不足借非独立站, 长版只计独立站剩余"
+  ]
+}
