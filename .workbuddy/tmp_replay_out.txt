@@ -1,0 +1,33 @@
+[mock_host] 实时拉取 清库方案成本核算: 233 行 (无缓存)
+[mock_host] 实时拉取 库存表: 7684 行 (无缓存)
+[mock_host] 实时拉取 清库参数配置: 1 行 (无缓存)
+setRecords 总条数: 325
+样例写回项 keys: [ 'recordId', 'fields' ] | recordId 样例: recvuAqcP3MgnV
+样例 fields keys: [
+  'fld_17_实际齐套数',
+  'fld_18_最佳方案',
+  'fld_19_预计回收资金',
+  'fld_new_仓储费',
+  'fld_22_最优窗口期(天)',
+  'fld_23_最优窗口方案'
+]
+主表 ndjson 行数: 233 | 样例 record_id: recvuAqcP3NAg6
+写回 recordId 数: 233 | 主表 record_id 数: 233 | 交集: 233
+插件重放 K 合计 = 1278 | 回收合计 = -35521
+主记录被写回条数 = 0 / 92
+与主表现值不一致(插件重放 vs 主表): 15 条
+   {"model":"AMBFC05NR-US","wK":0,"wPlan":"","tK":2,"tPlan":"A线上降价出清(100%覆盖)","pK":null,"pPlan":""}
+   {"model":"AMESD02NW-V-US","wK":0,"wPlan":"","tK":1,"tPlan":"A线上降价出清(100%覆盖)","pK":null,"pPlan":""}
+   {"model":"PDBFC03DW-US","wK":15,"wPlan":"A线上降价出清(100%覆盖)","tK":16,"tPlan":"A线上降价出清(100%覆盖)","pK":16,"pPlan":"A线上降价出清(100%覆盖)"}
+   {"model":"HNOFC39DN-LH-US","wK":91,"wPlan":"A促销(67套)+C激励(24套)","tK":93,"tPlan":"A促销(67套)+C激励(26套)","pK":93,"pPlan":"A促销(67套)+B出清(26套)"}
+   {"model":"AMBFC06NW-US","wK":0,"wPlan":"","tK":1,"tPlan":"A线上降价出清(100%覆盖)","pK":1,"pPlan":"A线上降价出清(100%覆盖)"}
+   {"model":"PDBFC01NW-US","wK":0,"wPlan":"","tK":1,"tPlan":"B出清(1套)","pK":null,"pPlan":""}
+   {"model":"PDBFC10DW-US","wK":0,"wPlan":"","tK":21,"tPlan":"A促销(4套)+B出清(17套)","pK":null,"pPlan":""}
+   {"model":"PDBFC09DW-US","wK":0,"wPlan":"","tK":27,"tPlan":"A促销(9套)+B出清(18套)","pK":null,"pPlan":""}
+   {"model":"PDBFC04LW-US","wK":0,"wPlan":"","tK":3,"tPlan":"A线上降价出清(100%覆盖)","pK":null,"pPlan":""}
+   {"model":"HNSS44B-US","wK":0,"wPlan":"","tK":1,"tPlan":"B出清(1套)","pK":null,"pPlan":""}
+   {"model":"HNSS6","wK":3,"wPlan":"A线上降价出清(100%覆盖)","tK":4,"tPlan":"A线上降价出清(100%覆盖)","pK":4,"pPlan":"A线上降价出清(100%覆盖)"}
+   {"model":"","wK":0,"wPlan":"","tK":null,"tPlan":"","pK":null,"pPlan":""}
+   {"model":"AMESD02NR-V-US","wK":0,"wPlan":"","tK":4,"tPlan":"A线上降价出清(100%覆盖)","pK":null,"pPlan":""}
+   {"model":"AMESD01NW-V-N1-US","wK":0,"wPlan":"","tK":135,"tPlan":"B出清(135套)","pK":128,"pPlan":"B出清(128套)"}
+   {"model":"AMBFC04DW-C1-N1-US","wK":0,"wPlan":"","tK":49,"tPlan":"B出清(49套)","pK":null,"pPlan":""}

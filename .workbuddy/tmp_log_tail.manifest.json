@@ -1,0 +1,188 @@
+{
+  "manifest_version": "v1",
+  "format": "ndjson",
+  "base_token": "HPsJbdMCva1IersNsFQco976n7B",
+  "table_id": "tblXNMVM0MNDgOzr",
+  "rev": 66,
+  "timezone": "Asia/Shanghai",
+  "query_context": {
+    "field_scope": "all_fields",
+    "record_scope": "all_records"
+  },
+  "requested_limit": 200,
+  "records_count": 65,
+  "page_count": 1,
+  "has_more": false,
+  "record_file": "D:\\agents_project\\清库方案自动计算\\.workbuddy\\tmp_log_tail.ndjson",
+  "record_file_size_bytes": 28077,
+  "manifest_file": "D:\\agents_project\\清库方案自动计算\\.workbuddy\\tmp_log_tail.manifest.json",
+  "columns": {
+    "A层套数": {
+      "field_id": "fldv8uRP6P",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 32,
+        "min": 224,
+        "max": 428,
+        "avg": 299
+      },
+      "example": 234
+    },
+    "B层套数": {
+      "field_id": "fldff8HDtw",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 32,
+        "min": 107,
+        "max": 1351,
+        "avg": 584.1212121212121
+      },
+      "example": 107
+    },
+    "C层套数": {
+      "field_id": "fld37iMbHa",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 32,
+        "min": 0,
+        "max": 582,
+        "avg": 78.78787878787878
+      },
+      "example": 0
+    },
+    "record_id": {
+      "physical_type": "string",
+      "stats": {
+        "max_length": 14
+      },
+      "example": "recvvlxFi5YGlx"
+    },
+    "ΔK未清库": {
+      "field_id": "fldXeWbRAE",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 32,
+        "min": 0,
+        "max": 2010,
+        "avg": 629.030303030303
+      },
+      "example": 0
+    },
+    "全局最优窗口(天)": {
+      "field_id": "fld3hwJajs",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 39,
+        "min": 7,
+        "max": 152,
+        "avg": 22.653846153846153
+      },
+      "example": 7
+    },
+    "关键参数": {
+      "field_id": "flddmRvjHO",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 20,
+        "max_length": 54
+      },
+      "example": "窗口30天；A降20%；B 1.5折；C 8折；推广30%；λ=1.0"
+    },
+    "场景名": {
+      "field_id": "fldM8HmiWL",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 20,
+        "max_length": 18
+      },
+      "example": "默认场景 (允许借调)"
+    },
+    "总齐套K": {
+      "field_id": "fld2Nalmf7",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 20,
+        "min": 0,
+        "max": 2351,
+        "avg": 1476.3111111111111
+      },
+      "example": 0
+    },
+    "报废成本USD": {
+      "field_id": "fldlCJos1o",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 32,
+        "min": 1945.92,
+        "max": 67743.54,
+        "avg": 19606.060606060608
+      },
+      "example": 5903
+    },
+    "最优分布": {
+      "field_id": "fldfKJs7Vr",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 32,
+        "max_length": 43
+      },
+      "example": "最优动态组合×24"
+    },
+    "最优方案净额USD": {
+      "field_id": "fldylglBFL",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 32,
+        "min": 13284.21,
+        "max": 148297.77,
+        "avg": 91019.37727272726
+      },
+      "example": 129627.5
+    },
+    "混合净额USD": {
+      "field_id": "fld6yjcTDY",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 32,
+        "min": 13284.21,
+        "max": 145109.7,
+        "avg": 64066.90515151515
+      },
+      "example": 28967.47
+    },
+    "计提USD": {
+      "field_id": "fldWfoWY8A",
+      "field_type": "number",
+      "physical_type": "number|null",
+      "stats": {
+        "null_count": 32,
+        "min": 0,
+        "max": 18181.25,
+        "avg": 3933.4948484848483
+      },
+      "example": 0
+    },
+    "运行时间": {
+      "field_id": "fldwXiOfRg",
+      "field_type": "text",
+      "physical_type": "string|null",
+      "stats": {
+        "null_count": 19,
+        "max_length": 19
+      },
+      "example": "debug"
+    }
+  }
+}

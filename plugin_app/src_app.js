@@ -1,6 +1,6 @@
 import { bitable, FieldType } from '@lark-base-open/js-sdk';
 import { tierRate, calcIncrementalStorageFee, getCurrentBDays } from './cost_calc.js';
-import { getProfitItem, getItemCostAndDim, getModelCostAndCbm } from './cost_provider.js';
+import { getProfitItem, getItemCostAndDim, getModelCostAndCbm, setRuntimeProfit, buildProfitDictFromRecords } from './cost_provider.js';
 
 // 默认配置
 const DEFAULTS = {
@@ -145,7 +145,7 @@ window.startExecution = async function() {
     }
 
     const tableList = await bitable.base.getTableList();
-    let mainTable = null, stockTable = null, paramsTable = null, logTable = null;
+    let mainTable = null, stockTable = null, paramsTable = null, logTable = null, profitTable = null;
 
     for (const t of tableList) {
       const name = await t.getName();
@@ -153,6 +153,7 @@ window.startExecution = async function() {
       else if (name === "库存表") stockTable = t;
       else if (name.includes("参数配置")) paramsTable = t;
       else if (name.includes("运行日志") || name.includes("测算日志")) logTable = t;
+      else if (name.includes("利润测算表")) profitTable = t;
     }
 
     if (!mainTable) throw new Error("未找到《清库方案成本核算》表");
@@ -193,6 +194,19 @@ window.startExecution = async function() {
           break;
         }
       }
+    }
+
+    // 1.5 读取利润测算表 -> 运行时成本字典 (2026-10-10 修复:
+    //     此前成本只读构建时内嵌快照, Base 更新利润表后插件沿用旧成本,
+    //     与 Python 实时拉取的口径分裂。现在运行时实读, 内嵌快照仅兜底。)
+    if (profitTable) {
+      log("正在读取《利润测算表》成本数据...", "info");
+      const profitRecords = await loadAllRecords(profitTable, 500);
+      const dict = buildProfitDictFromRecords(profitRecords);
+      setRuntimeProfit(dict);
+      log(`已加载利润表 ${profitRecords.length} 条 -> 运行时成本字典 ${Object.keys(dict).length} 个 item (内嵌快照兜底)`, "success");
+    } else {
+      log("⚠️ 未找到《利润测算表》, 成本将使用内嵌快照 (可能过期), 建议在 Base 中添加该表", "warn");
     }
 
     // 2. 读取库存全量批次

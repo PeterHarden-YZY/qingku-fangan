@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>清库方案财务汇总报告</title>
+<style>
+  body { font-family: "Segoe UI", "Microsoft YaHei", sans-serif; margin: 24px auto; max-width: 1080px; color: #1f2329; background: #f7f8fa; }
+  h1 { font-size: 22px; } h2 { font-size: 17px; margin-top: 32px; border-left: 4px solid #3370ff; padding-left: 8px; }
+  .meta { color: #646a73; font-size: 12px; margin-bottom: 16px; }
+  .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 16px 0; }
+  .card { background: #fff; border-radius: 8px; padding: 14px 16px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+  .card .v { font-size: 20px; font-weight: 600; margin-top: 4px; }
+  .card .l { font-size: 12px; color: #646a73; }
+  table { width: 100%; border-collapse: collapse; background: #fff; font-size: 13px; box-shadow: 0 1px 3px rgba(0,0,0,.08); border-radius: 8px; overflow: hidden; }
+  th { background: #f0f1f5; text-align: left; padding: 8px 10px; font-weight: 600; white-space: nowrap; }
+  td { padding: 7px 10px; border-top: 1px solid #f0f1f5; white-space: nowrap; }
+  .pos { color: #d83931; font-weight: 600; }
+  .neg { color: #2ea121; font-weight: 600; }
+  .muted { color: #8f959e; font-size: 12px; white-space: normal; }
+  .tag { background: #e8f0ff; color: #3370ff; border-radius: 4px; padding: 1px 6px; font-size: 11px; }
+  .note { background: #fff7e8; border: 1px solid #ffe3b3; border-radius: 8px; padding: 12px 16px; font-size: 13px; margin: 12px 0; }
+</style>
+</head>
+<body>
+<h1>清库方案财务汇总报告</h1>
+<div class="meta">生成时间 2026-10-10 14:02 · 数据源: 飞书多维表格《清库方案成本核算》(221条) + 《库存表》行级批次 (7,691条) · 币种: USD</div>
+
+<div class="cards">
+  <div class="card"><div class="l">总齐套数 K</div><div class="v">1350 套</div></div>
+  <div class="card"><div class="l">本渠道净额合计</div><div class="v pos">$6,750</div></div>
+  <div class="card"><div class="l">未清库计提</div><div class="v neg">$0</div></div>
+  <div class="card"><div class="l">长版报废成本</div><div class="v neg">$13,564</div></div>
+</div>
+<div class="cards">
+  <div class="card"><div class="l">在途入池（库龄0）</div><div class="v">见组件池</div></div>
+  <div class="card"><div class="l">工厂决策 model 数</div><div class="v">2 个</div></div>
+  <div class="card"><div class="l">工厂建议发货</div><div class="v">494 套</div></div>
+  <div class="card"><div class="l">工厂不发货亏损</div><div class="v neg">$0</div></div>
+</div>
+
+<h2>清库路径分布（需求分层瀑布，60.0 天销售窗口）</h2>
+<div class="note"><b>时间口径</b>：可销量 Q = 过去30天销量 × (60.0/30) × 放大系数M（M = clamp(1 + λ×折扣深度, 1.0, 3.0), λ=1.0）。即「未来 60.0 天内、在该售价下的预计可销量」——分层套数全部是 60.0 天窗口内的量，不是即时全部卖出。B/C 两路径假设买家一次接盘全量。</div>
+<table>
+<tr><th>路径</th><th>处置套数</th><th>说明</th></tr>
+<tr><td>A 降价售卖（80折）</td><td>270 套</td><td class="muted">60.0天窗口内预计可卖；u_A = 降价售价 − 固定成本 − 降价售价×30% 推广费</td></tr>
+<tr><td>C 激励方案（促销 8 折）</td><td>136 套</td><td class="muted">与 A 同价（80折），需求分层下增量恒为 0 —— 见下方参数说明</td></tr>
+<tr><td>B 线下清库（1.5折）</td><td>944 套</td><td class="muted">u_B = 原价×1.5折 − (采购价+头程)；按买家全量接盘测算</td></tr>
+<tr><td>未清库 ΔK（计提）</td><td>0 套</td><td class="muted">60.0天窗口内卖不掉的部分，按批次库龄分档计提: 121-180天×30% / 181-270天×80% / &gt;270天×150%（基数=采购价）</td></tr>
+</table>
+
+<div class="note"><b>参数说明</b>：当前场景「默认场景(代码默认值)」，全部参数来自 Base《清库参数配置》表。方案 A 降价幅度当前为 20%，与方案 C 促销售价（8折）相同，需求分层中 C 层增量恒为 0。要激活激励方案通道：把参数表中「A降价幅度」调小（如 10%，即 9 折卖）后重跑全链路即可。</div>
+
+<h2>主 Model 方案对比与最优方案（按最优净额降序）</h2>
+<div class="meta">最佳方案 = 最优动态组合的具体执行动作（方案+套数）；预计回收资金按该组合口径。W* = 该 model 单独决策时达到最高净额所需的最短销售窗口（净额对窗口不敏感时为 —）。单方案净额：A 卖得掉的按 u_A 算、卖不掉计提；B 全量出清；C 激励全量；最优组合 = 4 选项全局比选后的最优。</div>
+<table>
+<tr><th>Model</th><th>齐套 K</th><th>S30</th><th>60.0天分层执行</th><th>成本拆解</th><th>ΔK</th><th>计提</th><th>最优方案</th><th>最优净额</th><th>最优窗口</th><th>多方案净额对比</th></tr>
+<tr>
+      <td>AMESD04DW-V-US</td><td>136</td><td>38</td><td>A×91 + B×45</td>
+      <td class="muted">采$112.0+头$17.6+关$12.3+尾$109.3+仓$7.67</td>
+      <td>0</td><td>$0</td>
+      <td><b>A促销(91套)+B出清(45套)</b></td><td class="pos">$26,264</td>
+      <td>90</td>
+      <td class="muted" style="white-space:normal">A 降价卖:$25,612<br>B 线下清库:$549<br>C 激励方案:-$1,077<br>最优组合:$26,264</td></tr><tr>
+      <td>HNOFC39DN-LH-US</td><td>91</td><td>28</td><td>A×67 + C×24</td>
+      <td class="muted">采$52.8+头$9.5+关$5.8+尾$20.6+仓$0.75</td>
+      <td>0</td><td>$0</td>
+      <td><b>A促销(67套)+C激励(24套)</b></td><td class="pos">$3,135</td>
+      <td>82</td>
+      <td class="muted" style="white-space:normal">A 降价卖:$3,183<br>B 线下清库:-$2,861<br>C 激励方案:-$178<br>最优组合:$3,135</td></tr><tr>
+      <td>PDBFC03DW-US</td><td>15</td><td>28</td><td>A×15</td>
+      <td class="muted">采$54.5+头$6.8+关$6.0+尾$26.8+仓$2.02</td>
+      <td>0</td><td>$0</td>
+      <td><b>A线上降价出清(100%覆盖)</b></td><td class="pos">$615</td>
+      <td>15</td>
+      <td class="muted" style="white-space:normal">A 降价卖:$615<br>B 线下清库:-$461<br>C 激励方案:-$29<br>最优组合:$615</td></tr><tr>
+      <td>AMESD04NR-V-US</td><td>2</td><td>7</td><td>A×2</td>
+      <td class="muted">采$112.0+头$17.6+关$12.3+尾$109.3+仓$12.25</td>
+      <td>0</td><td>$0</td>
+      <td><b>A线上降价出清(100%覆盖)</b></td><td class="pos">$481</td>
+      <td>8</td>
+      <td class="muted" style="white-space:normal">A 降价卖:$481<br>B 线下清库:-$20<br>C 激励方案:-$14<br>最优组合:$481</td></tr><tr>
+      <td>PDBFC02W-US</td><td>57</td><td>4</td><td>A×9 + C×9 + B×39</td>
+      <td class="muted">采$49.8+头$9.0+关$5.5+尾$34.0+仓$0.39</td>
+      <td>0</td><td>$0</td>
+      <td><b>A促销(9套)+C激励(9套)+B出清(39套)</b></td><td class="pos">$479</td>
+      <td>263</td>
+      <td class="muted" style="white-space:normal">A 降价卖:$913<br>B 线下清库:-$594<br>C 激励方案:-$164<br>最优组合:$479</td></tr><tr>
+      <td>AMESD01DW-V5-US</td><td>1</td><td>6</td><td>A×1</td>
+      <td class="muted">采$46.6+头$7.3+关$5.1+尾$30.1+仓$6.05</td>
+      <td>0</td><td>$0</td>
+      <td><b>A线上降价出清(100%覆盖)</b></td><td class="pos">$129</td>
+      <td>5</td>
+      <td class="muted" style="white-space:normal">A 降价卖:$129<br>B 线下清库:-$1<br>C 激励方案:-$3<br>最优组合:$129</td></tr><tr>
+      <td>AMESD01NW-V5-US</td><td>1</td><td>4</td><td>A×1</td>
+      <td class="muted">采$46.9+头$7.4+关$5.2+尾$30.1+仓$6.45</td>
+      <td>0</td><td>$0</td>
+      <td><b>A线上降价出清(100%覆盖)</b></td><td class="pos">$111</td>
+      <td>7</td>
+      <td class="muted" style="white-space:normal">A 降价卖:$111<br>B 线下清库:-$6<br>C 激励方案:-$3<br>最优组合:$111</td></tr><tr>
+      <td>HNOFC38DN-LH-US</td><td>174</td><td>23</td><td>A×55 + C×55 + B×64</td>
+      <td class="muted">采$51.5+头$8.1+关$5.7+尾$14.1+仓$2.87</td>
+      <td>0</td><td>$0</td>
+      <td><b>A促销(55套)+C激励(55套)+B出清(64套)</b></td><td class="pos">$111</td>
+      <td>128</td>
+      <td class="muted" style="white-space:normal">A 降价卖:$2,712<br>B 线下清库:-$5,360<br>C 激励方案:-$334<br>最优组合:$111</td></tr><tr>
+      <td>AMBFC04NR-C1-US</td><td>2</td><td>1</td><td>A×2</td>
+      <td class="muted">采$39.0+头$7.0+关$4.3+尾$30.8+仓$6.24</td>
+      <td>0</td><td>$0</td>
+      <td><b>A线上降价出清(100%覆盖)</b></td><td class="pos">$61</td>
+      <td>50</td>
+      <td class="muted" style="white-space:normal">A 降价卖:$61<br>B 线下清库:-$42<br>C 激励方案:-$3<br>最优组合:$61</td></tr><tr>
+      <td>HNSS6</td><td>3</td><td>20</td><td>A×3</td>
+      <td class="muted">采$7.9+头$0.5+关$0.9+尾$7.2+仓$0.33</td>
+      <td>0</td><td>$0</td>
+      <td><b>A线上降价出清(100%覆盖)</b></td><td class="pos">$29</td>
+      <td>4</td>
+      <td class="muted" style="white-space:normal">A 降价卖:$34<br>B 线下清库:-$6<br>C 激励方案:-$1<br>最优组合:$29</td></tr><tr>
+      <td>PDBFC09LW-US</td><td>13</td><td>3</td><td>A×7 + C×6</td>
+      <td class="muted">采$51.0+头$7.5+关$5.6+尾$30.1+仓$4.00</td>
+      <td>0</td><td>$0</td>
+      <td><b>A促销(7套)+C激励(6套)</b></td><td class="neg">-$6</td>
+      <td>59</td>
+      <td class="muted" style="white-space:normal">A 降价卖:$123<br>B 线下清库:-$449<br>C 激励方案:-$22<br>最优组合:-$6</td></tr><tr>
+      <td>HNESD216LW-140A-V-US</td><td>4</td><td>1</td><td>C×2 + B×2</td>
+      <td class="muted">采$99.8+头$10.5+关$11.0+尾$40.8+仓$2.68</td>
+      <td>0</td><td>$0</td>
+      <td><b>C激励(2套)+B出清(2套)</b></td><td class="neg">-$177</td>
+      <td>100</td>
+      <td class="muted" style="white-space:normal">A 降价卖:-$38<br>B 线下清库:-$334<br>C 激励方案:-$9<br>最优组合:-$177</td></tr><tr>
+      <td>AMBFC04NW-C1-N1-US</td><td>14</td><td>0</td><td>B×14</td>
+      <td class="muted">采$36.1+头$7.1+关$4.0+尾$29.2+仓$1.52</td>
+      <td>0</td><td>$0</td>
+      <td><b>B出清(14套)</b></td><td class="neg">-$199</td>
+      <td>—</td>
+      <td class="muted" style="white-space:normal">A 降价卖:$0<br>B 线下清库:-$199<br>C 激励方案:-$26<br>最优组合:-$199</td></tr><tr>
+      <td>AMBFC04NW-C2-US</td><td>29</td><td>1</td><td>A×2 + C×2 + B×25</td>
+      <td class="muted">采$37.0+头$6.7+关$4.1+尾$28.4+仓$2.10</td>
+      <td>0</td><td>$0</td>
+      <td><b>A促销(2套)+C激励(2套)+B出清(25套)</b></td><td class="neg">-$346</td>
+      <td>725</td>
+      <td class="muted" style="white-space:normal">A 降价卖:-$345<br>B 线下清库:-$459<br>C 激励方案:-$52<br>最优组合:-$346</td></tr><tr>
+      <td>PDBFC03NW-US</td><td>17</td><td>1</td><td>A×2 + C×2 + B×13</td>
+      <td class="muted">采$54.5+头$6.8+关$6.0+尾$26.8+仓$1.59</td>
+      <td>0</td><td>$0</td>
+      <td><b>A促销(2套)+C激励(2套)+B出清(13套)</b></td><td class="neg">-$373</td>
+      <td>225</td>
+      <td class="muted" style="white-space:normal">A 降价卖:$74<br>B 线下清库:-$576<br>C 激励方案:-$32<br>最优组合:-$373</td></tr><tr>
+      <td>AMBFC04NW-C2-N1-US</td><td>33</td><td>0</td><td>B×33</td>
+      <td class="muted">采$36.1+头$6.4+关$4.0+尾$26.8+仓$0.56</td>
+      <td>0</td><td>$0</td>
+      <td><b>B出清(33套)</b></td><td class="neg">-$438</td>
+      <td>—</td>
+      <td class="muted" style="white-space:normal">A 降价卖:$0<br>B 线下清库:-$438<br>C 激励方案:-$59<br>最优组合:-$438</td></tr><tr>
+      <td>AMBFC04NR-C2-US</td><td>70</td><td>4</td><td>A×9 + C×9 + B×52</td>
+      <td class="muted">采$37.0+头$6.7+关$4.1+尾$28.4+仓$2.54</td>
+      <td>0</td><td>$0</td>
+      <td><b>A促销(9套)+C激励(9套)+B出清(52套)</b></td><td class="neg">-$525</td>
+      <td>188</td>
+      <td class="muted" style="white-space:normal">A 降价卖:-$765<br>B 线下清库:-$1,122<br>C 激励方案:-$126<br>最优组合:-$525</td></tr><tr>
+      <td>AMBFC04NR-C2-N1-US</td><td>41</td><td>0</td><td>B×41</td>
+      <td class="muted">采$36.1+头$6.4+关$4.0+尾$26.8+仓$1.55</td>
+      <td>0</td><td>$0</td>
+      <td><b>B出清(41套)</b></td><td class="neg">-$585</td>
+      <td>—</td>
+      <td class="muted" style="white-space:normal">A 降价卖:$0<br>B 线下清库:-$585<br>C 激励方案:-$74<br>最优组合:-$585</td></tr><tr>
+      <td>AMBFC04NR-C1-N1-US</td><td>43</td><td>0</td><td>B×43</td>
+      <td class="muted">采$36.8+头$7.1+关$4.0+尾$29.2+仓$1.73</td>
+      <td>0</td><td>$0</td>
+      <td><b>B出清(43套)</b></td><td class="neg">-$781</td>
+      <td>—</td>
+      <td class="muted" style="white-space:normal">A 降价卖:$0<br>B 线下清库:-$781<br>C 激励方案:-$72<br>最优组合:-$781</td></tr><tr>
+      <td>PDBFC12LW-US</td><td>54</td><td>0</td><td>B×54</td>
+      <td class="muted">采$28.2+头$4.2+关$3.1+尾$20.0+仓$1.10</td>
+      <td>0</td><td>$0</td>
+      <td><b>B出清(54套)</b></td><td class="neg">-$1,012</td>
+      <td>—</td>
+      <td class="muted" style="white-space:normal">A 降价卖:-$178<br>B 线下清库:-$1,012<br>C 激励方案:-$51<br>最优组合:-$1,012</td></tr><tr>
+      <td>PDBFC10NW-US</td><td>52</td><td>0</td><td>B×52</td>
+      <td class="muted">采$40.3+头$5.2+关$4.4+尾$26.8+仓$0.05</td>
+      <td>0</td><td>$0</td>
+      <td><b>B出清(52套)</b></td><td class="neg">-$1,193</td>
+      <td>—</td>
+      <td class="muted" style="white-space:normal">A 降价卖:$0<br>B 线下清库:-$1,193<br>C 激励方案:-$75<br>最优组合:-$1,193</td></tr><tr>
+      <td>AMBFC04NR-V-US</td><td>48</td><td>2</td><td>A×4 + C×4 + B×40</td>
+      <td class="muted">采$76.0+头$13.7+关$8.4+尾$59.1+仓$4.90</td>
+      <td>0</td><td>$0</td>
+      <td><b>A促销(4套)+C激励(4套)+B出清(40套)</b></td><td class="neg">-$1,226</td>
+      <td>600</td>
+      <td class="muted" style="white-space:normal">A 降价卖:-$2,135<br>B 线下清库:-$1,738<br>C 激励方案:-$169<br>最优组合:-$1,226</td></tr><tr>
+      <td>MSESD52N-V-US</td><td>42</td><td>9</td><td>C×21 + B×21</td>
+      <td class="muted">采$91.0+头$12.2+关$10.0+尾$46.6+仓$4.00</td>
+      <td>0</td><td>$0</td>
+      <td><b>C激励(21套)+B出清(21套)</b></td><td class="neg">-$1,654</td>
+      <td>117</td>
+      <td class="muted" style="white-space:normal">A 降价卖:-$1,859<br>B 线下清库:-$3,039<br>C 激励方案:-$100<br>最优组合:-$1,654</td></tr><tr>
+      <td>PDBFC09NW-US</td><td>56</td><td>0</td><td>B×56</td>
+      <td class="muted">采$49.5+头$7.5+关$5.4+尾$30.1+仓$0.10</td>
+      <td>0</td><td>$0</td>
+      <td><b>B出清(56套)</b></td><td class="neg">-$1,735</td>
+      <td>—</td>
+      <td class="muted" style="white-space:normal">A 降价卖:$0<br>B 线下清库:-$1,735<br>C 激励方案:-$94<br>最优组合:-$1,735</td></tr><tr>
+      <td>AMESD01NR-V-N1-US</td><td>36</td><td>0</td><td>B×36</td>
+      <td class="muted">采$119.0+头$20.1+关$13.1+尾$86.9+仓$4.38</td>
+      <td>0</td><td>$0</td>
+      <td><b>B出清(36套)</b></td><td class="neg">-$2,666</td>
+      <td>—</td>
+      <td class="muted" style="white-space:normal">A 降价卖:-$389<br>B 线下清库:-$2,666<br>C 激励方案:-$158<br>最优组合:-$2,666</td></tr><tr>
+      <td>HNOFC42BN-US</td><td>172</td><td>0</td><td>B×172</td>
+      <td class="muted">采$38.0+头$6.5+关$4.2+尾$12.1+仓$1.78</td>
+      <td>0</td><td>$0</td>
+      <td><b>B出清(172套)</b></td><td class="neg">-$3,256</td>
+      <td>—</td>
+      <td class="muted" style="white-space:normal">A 降价卖:-$1,958<br>B 线下清库:-$3,256<br>C 激励方案:-$289<br>最优组合:-$3,256</td></tr><tr>
+      <td>HNESD213LW-120A-V-US</td><td>65</td><td>1</td><td>C×2 + B×63</td>
+      <td class="muted">采$75.0+头$8.6+关$8.2+尾$36.7+仓$2.44</td>
+      <td>0</td><td>$0</td>
+      <td><b>C激励(2套)+B出清(63套)</b></td><td class="neg">-$3,825</td>
+      <td>725</td>
+      <td class="muted" style="white-space:normal">A 降价卖:-$3,612<br>B 线下清库:-$3,938<br>C 激励方案:-$117<br>最优组合:-$3,825</td></tr><tr>
+      <td>AMESD01DW-V-N1-US</td><td>79</td><td>0</td><td>B×79</td>
+      <td class="muted">采$119.0+头$20.2+关$13.1+尾$86.9+仓$1.24</td>
+      <td>0</td><td>$0</td>
+      <td><b>B出清(79套)</b></td><td class="neg">-$4,668</td>
+      <td>—</td>
+      <td class="muted" style="white-space:normal">A 降价卖:-$853<br>B 线下清库:-$4,668<br>C 激励方案:-$398<br>最优组合:-$4,668</td></tr>
+</table>
+
+<h2>长版报废清单（挂载子 model / 单一主记录维度）</h2>
+<table>
+<tr><th>Model</th><th>报废数量</th><th>采购价+头程</th><th>处理费/件</th><th>单件报废成本</th><th>报废成本</th><th>剩余批次（数量@库龄）</th></tr>
+<tr>
+      <td>AMESD01NW-D-US <span class="tag">子model</span></td>
+      <td>9</td><td>$16.49</td>
+      <td>$2.00</td><td>$18.49</td>
+      <td class="neg">$166</td><td class="muted">2件@280天、7件@137天</td></tr><tr>
+      <td>AMESD02B-F-US <span class="tag">子model</span></td>
+      <td>82</td><td>$43.82</td>
+      <td>$2.00</td><td>$45.82</td>
+      <td class="neg">$3,757</td><td class="muted">82件@127天</td></tr><tr>
+      <td>AMESD02NW-C1-US <span class="tag">子model</span></td>
+      <td>14</td><td>$50.77</td>
+      <td>$2.00</td><td>$52.77</td>
+      <td class="neg">$739</td><td class="muted">11件@277天、3件@276天</td></tr><tr>
+      <td>AMESD04NW-C1-US <span class="tag">子model</span></td>
+      <td>13</td><td>$49.20</td>
+      <td>$3.00</td><td>$52.20</td>
+      <td class="neg">$679</td><td class="muted">4件@73天、5件@29天、4件@16天</td></tr><tr>
+      <td>AMESD04NW-C2-US <span class="tag">子model</span></td>
+      <td>28</td><td>$48.94</td>
+      <td>$3.00</td><td>$51.94</td>
+      <td class="neg">$1,454</td><td class="muted">27件@278天、1件@149天</td></tr><tr>
+      <td>AMBFC04W-C2-US <span class="tag">子model</span></td>
+      <td>80</td><td>$46.46</td>
+      <td>$3.00</td><td>$49.46</td>
+      <td class="neg">$3,957</td><td class="muted">4件@199天、2件@198天、74件@159天</td></tr><tr>
+      <td>HNESD225WN-160A-US <span class="tag">子model</span></td>
+      <td>14</td><td>$57.00</td>
+      <td>$3.00</td><td>$60.00</td>
+      <td class="neg">$840</td><td class="muted">4件@297天、6件@186天、1件@105天、3件@104天</td></tr><tr>
+      <td>HNESD224N-160A-US <span class="tag">子model</span></td>
+      <td>1</td><td>$35.90</td>
+      <td>$3.00</td><td>$38.90</td>
+      <td class="neg">$39</td><td class="muted">1件@109天</td></tr><tr>
+      <td>AMESD02DW-C1-US <span class="tag">子model</span></td>
+      <td>7</td><td>$50.77</td>
+      <td>$2.00</td><td>$52.77</td>
+      <td class="neg">$369</td><td class="muted">7件@57天</td></tr><tr>
+      <td>AMESD02NR-C2-US <span class="tag">子model</span></td>
+      <td>1</td><td>$61.52</td>
+      <td>$3.00</td><td>$64.52</td>
+      <td class="neg">$65</td><td class="muted">1件@31天</td></tr><tr>
+      <td>AMESD04DW-C2-US <span class="tag">子model</span></td>
+      <td>13</td><td>$48.94</td>
+      <td>$3.00</td><td>$51.94</td>
+      <td class="neg">$675</td><td class="muted">5件@124天、8件@32天</td></tr><tr>
+      <td>AMESD04NR-C2-US <span class="tag">子model</span></td>
+      <td>10</td><td>$48.94</td>
+      <td>$3.00</td><td>$51.94</td>
+      <td class="neg">$519</td><td class="muted">10件@149天</td></tr><tr>
+      <td>HNESD226N-160A-US <span class="tag">子model</span></td>
+      <td>3</td><td>$51.61</td>
+      <td>$3.00</td><td>$54.61</td>
+      <td class="neg">$164</td><td class="muted">3件@116天</td></tr><tr>
+      <td>AMESD01NW-D-N1-US <span class="tag">子model</span></td>
+      <td>70</td><td>$0.00</td>
+      <td>$2.00</td><td>$2.00</td>
+      <td class="neg">$140</td><td class="muted">29件@58天、26件@52天、15件@47天</td></tr>
+</table>
+
+<h2>工厂未发货库存决策（第四轮新增）</h2>
+<div class="note"><b>决策口径</b>：候选发货量 X ∈ {0, ⌊F/2⌋, F}（F = BOM 各子件未发货量最小值；整单全发或最多除以2，不能拆散套）。发货的套数按该 model 本轮最优路径（A/B/C）测算单套净回收；不发货的部分按「亏损采购价」计提（Σ未发件×采购价）。BOM 款任一子件未填写工厂未发货量则无法齐套决策，标记 ⚠️。</div>
+<table>
+<tr><th>Model</th><th>各子件未发货量</th><th>可发上限 F_min</th><th>决策</th><th>发货套数</th><th>单套发货净回收</th><th>决策价值 V</th><th>不发货亏损</th></tr>
+<tr>
+          <td>AMBFC04NR-C1-N1-US</td><td>AMBFC04NR-C1-N1-US×198</td><td>198</td>
+          <td><b>整单全发(198套)</b></td><td>198</td>
+          <td>$69.66</td><td>$13,793</td>
+          <td class="neg">$0</td></tr><tr>
+          <td>AMBFC04NR-C2-N1-US</td><td>AMBFC04NR-C2-N1-US×296</td><td>296</td>
+          <td><b>整单全发(296套)</b></td><td>296</td>
+          <td>$79.53</td><td>$23,541</td>
+          <td class="neg">$0</td></tr><tr>
+          <td>AMESD01DW-V-N1-US</td><td>AMBFC04DW-C1-N1-US×298</td><td>298</td>
+          <td class="muted">⚠️ 子件未填工厂未发货量: AMBFC04DW-C2-N1-US,HNESD217B-US,AMESD01DW-D-N1-US</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr>
+          <td>AMESD01NR-V-N1-US</td><td>AMBFC04NR-C1-N1-US×198、AMBFC04NR-C2-N1-US×296</td><td>198</td>
+          <td class="muted">⚠️ 子件未填工厂未发货量: HNESD217B-US,AMESD01NR-D-N1-US</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+</table>
+
+<h2>口径与规则</h2>
+<div class="meta" style="font-size:12px;line-height:1.8">
+· 优先级：过去30天营收（销量×售价）降序，瀑布分配共享组件，FIFO 最老批次优先消耗<br>
+· 组件池：《库存表》「独立站团队 + 海外仓」行级批次 + 在途批次（库龄0，到货时间≤60.0天才入池）；同名子 model 合并，避免关系行重复计数<br>
+· 工厂未发货：候选 X ∈ {0, ⌊F/2⌋, F}，发货按最优路径净回收测算，不发货亏采购价；在《库存表》「工厂未发货数量」列按 item 人工填写<br>
+· min(独立站, 海外仓总量)：独立站库存已验证全部位于海外仓，行级口径自动满足<br>
+· 净额 = k_A×u_A + k_B×u_B − 奖金_C − 计提费用；报废成本 = Σ 剩余量×(采购价+头程+处理费)，处理费 &lt;50lbs $2 / ≥50lbs $3<br>
+· 已知数据缺失：PDBFC09DW-US / PDBFC09LW-US 固定成本合计为空，按 0 参与测算
+</div>
+</body>
+</html>

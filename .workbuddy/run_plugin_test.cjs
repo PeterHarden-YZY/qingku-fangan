@@ -54,7 +54,7 @@ const sdkModule = require('./mock_sdk/mock_js_sdk.esm.cjs');
 
 // 把 mock 宿主挂到全局 (mock SDK 的 getter 会读到)
 globalThis.__MOCK_BITABLE_BASE__ = {
-  getTableList: () => Promise.resolve([tables.main, tables.stock, tables.params, tables.log]),
+  getTableList: () => Promise.resolve([tables.main, tables.stock, tables.params, tables.profit, tables.log]),
 };
 // 同时导出一份(测试诊断用)
 sdkModule.bitable.base = globalThis.__MOCK_BITABLE_BASE__;

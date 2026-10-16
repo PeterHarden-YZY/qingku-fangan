@@ -14,6 +14,7 @@ const BASE_TOKEN = 'HPsJbdMCva1IersNsFQco976n7B';
 const MAIN_TABLE = 'tblvEAMIFUSzjYmW';
 const STOCK_TABLE = 'tblNnE4WXy0esyGt';
 const PARAMS_TABLE = 'tblaGnwkT7yEa8cW';
+const PROFIT_TABLE = 'tblHVAkfBvpBHPh4'; // 2026-10-10: 利润测算表(成本权威源), 插件运行时实读
 
 function larkCli() {
   const cands = [path.join(os.homedir(), '.workbuddy/binaries/node/cli-connector-packages/lark-cli.cmd')];
@@ -54,6 +55,7 @@ function fetchTableLive(tableId, label) {
 const rows = fetchTableLive(MAIN_TABLE, '清库方案成本核算');
 const stockRows = fetchTableLive(STOCK_TABLE, '库存表');
 const paramsRows = fetchTableLive(PARAMS_TABLE, '清库参数配置');
+const profitRows = fetchTableLive(PROFIT_TABLE, '利润测算表');
 
 // 主表当前真实字段清单 (2026-09-18 更新: 在途/工厂输入字段迁移到主表;
 // 傍晚更新: +手动补充item(item兜底) +最优窗口方案(W*下方案说明))
@@ -133,6 +135,7 @@ const tables = {
   main: makeTable('清库模式成本核算'.replace('式', '方'), MAIN_FIELDS, rows),   // 清库方案成本核算
   stock: makeTable('库存表', ['item', '所属团队', '仓库类型', '可用量', '库龄(程序拉取)'], stockRows),
   params: makeTable('清库参数配置', ['场景名', '是否启用', '销量预测窗口(天)', 'A降价幅度', 'B线下折扣', 'C促销售价折扣', 'A推广费率', '销量放大系数λ', '放大系数上限', '放大系数下限', '奖金档1上限(万USD)', '奖金档1比例', '奖金档2上限(万USD)', '奖金档2比例', '奖金档3比例', '报废费-轻(USD/件)', '报废费-重(USD/件)', '重量分界(lbs)', '计提库龄分界1(天)', '计提比例1(120-180天)', '计提库龄分界2(天)', '计提比例2(181-270天)', '计提比例3(>270天)'], paramsRows),
+  profit: makeTable('利润测算表-导入多维表格', ['Item', '采购', '采购价$', '头程', '关税', '尾程', '长cm', '宽cm', '高cm', '毛重kg'], profitRows),
   log: makeTable('测算运行日志', ['运行时间戳', '测算场景', '关键参数快照', '全局最优窗口(天)'], []),
 };
 

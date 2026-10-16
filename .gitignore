@@ -1,0 +1,6 @@
+# 构建依赖（npm install 可恢复）
+node_modules/
+
+# 调试产物
+plugin_app/tmp/
+plugin_app/dev/

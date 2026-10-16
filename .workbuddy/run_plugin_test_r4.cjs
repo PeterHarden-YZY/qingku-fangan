@@ -120,7 +120,7 @@ tables.main = Object.assign({}, mainTable, {
 tables.stock = stockTable; // 库存表不再注入 (纯数据源)
 
 globalThis.__MOCK_BITABLE_BASE__ = {
-  getTableList: () => Promise.resolve([tables.main, tables.stock, tables.params, tables.log]),
+  getTableList: () => Promise.resolve([tables.main, tables.stock, tables.params, tables.profit, tables.log]),
 };
 sdkModule.bitable.base = globalThis.__MOCK_BITABLE_BASE__;
 
